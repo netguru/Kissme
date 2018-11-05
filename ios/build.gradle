@@ -1,0 +1,14 @@
+apply plugin: "kotlin-platform-native"
+
+sourceSets {
+    main {
+        component {
+            targets = ['ios_arm64', 'ios_x64']
+            outputKinds = [KLIBRARY]
+        }
+    }
+}
+
+dependencies {
+    expectedBy project(':common')
+}
