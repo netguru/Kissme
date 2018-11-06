@@ -1,1 +1,9 @@
-<manifest package="com.netguru.multiplatformsettings"/>
+<manifest package="com.netguru.multiplatformsettings" xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <provider
+                android:authorities="${applicationId}.initprovider"
+                android:exported="false"
+                android:enabled="true"
+                android:name="com.netguru.multiplatformstorage.SharedPreferencesInitializer"/>
+    </application>
+</manifest>

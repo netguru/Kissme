@@ -7,6 +7,7 @@ android {
     defaultConfig {
         minSdkVersion 15
     }
+    testOptions.unitTests.includeAndroidResources = true
 
     sourceSets.all {
         it.java.srcDir "src/$it.name/kotlin"
@@ -17,4 +18,11 @@ dependencies {
     expectedBy project(':common')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation "io.mockk:mockk:1.8.12.kotlin13"
+    testImplementation "androidx.test:core:1.0.0"
+    testImplementation "androidx.test.ext:junit:1.0.0"
+    testImplementation "org.robolectric:robolectric:4.0"
 }
