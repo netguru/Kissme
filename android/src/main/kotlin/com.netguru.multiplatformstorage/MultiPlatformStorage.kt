@@ -26,6 +26,11 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
 
     actual fun putFloat(key: String, value: Float) = preferences.edit { putFloat(key, value) }
 
+    actual fun getDouble(key: String, defaultValue: Double) =
+        Double.fromBits(preferences.getLong(key, defaultValue.toRawBits()))
+
+    actual fun putDouble(key: String, value: Double) = preferences.edit { putLong(key, value.toRawBits()) }
+
     actual fun getBoolean(key: String, defaultValue: Boolean): Boolean = preferences.getBoolean(key, defaultValue)
 
     actual fun putBoolean(key: String, value: Boolean) = preferences.edit { putBoolean(key, value) }

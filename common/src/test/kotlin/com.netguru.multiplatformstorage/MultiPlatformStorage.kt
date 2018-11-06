@@ -92,6 +92,27 @@ class MultiPlatformStorageTest : BaseTest() {
     }
 
     @Test
+    fun `should get proper double value when storage contains key`() {
+        //given
+        storage.putDouble(DOUBLE_KEY, DOUBLE)
+        //when
+        val data = storage.getDouble(DOUBLE_KEY, 0.0)
+        //then
+        assertEquals(DOUBLE, data)
+    }
+
+    @Test
+    fun `should return default double value when storage doesn't contain key`() {
+        //given
+        val defaultValue = 2.0
+        storage.putDouble(DOUBLE_KEY, DOUBLE)
+        //when
+        val data = storage.getDouble("key", defaultValue)
+        //then
+        assertEquals(defaultValue, data)
+    }
+
+    @Test
     fun `should get proper boolean value when storage contains key`() {
         //given
         storage.putBoolean(BOOLEAN_KEY, BOOLEAN)
@@ -140,6 +161,7 @@ class MultiPlatformStorageTest : BaseTest() {
             putInt(INT_KEY, INT)
             putLong(LONG_KEY, LONG)
             putFloat(FLOAT_KEY, FLOAT)
+            putDouble(DOUBLE_KEY, DOUBLE)
             putBoolean(BOOLEAN_KEY, BOOLEAN)
         }
         //when
@@ -150,6 +172,7 @@ class MultiPlatformStorageTest : BaseTest() {
             dataMap.containsKey(INT_KEY)
             dataMap.containsKey(LONG_KEY)
             dataMap.containsKey(FLOAT_KEY)
+            dataMap.containsKey(DOUBLE_KEY)
             dataMap.containsKey(BOOLEAN_KEY)
             dataMap.containsKey(BOOLEAN_KEY)
         }
@@ -164,6 +187,8 @@ class MultiPlatformStorageTest : BaseTest() {
         private const val LONG_KEY = "key:long"
         private const val FLOAT = 32F
         private const val FLOAT_KEY = "key:float"
+        private const val DOUBLE = 10.0
+        private const val DOUBLE_KEY = "key:double"
         private const val BOOLEAN = true
         private const val BOOLEAN_KEY = "key:boolean"
     }

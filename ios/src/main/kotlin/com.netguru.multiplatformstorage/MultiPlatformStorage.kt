@@ -30,6 +30,12 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
 
     actual fun putFloat(key: String, value: Float) {}
 
+    actual fun getDouble(key: String, defaultValue: Double): Double {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    actual fun putDouble(key: String, value: Double) {}
+
     actual fun getBoolean(key: String, defaultValue: Boolean): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

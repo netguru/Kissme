@@ -20,6 +20,10 @@ expect class MultiPlatformStorage(name: String? = null) {
 
     fun putFloat(key: String, value: Float)
 
+    fun getDouble(key: String, defaultValue: Double): Double
+
+    fun putDouble(key: String, value: Double)
+
     fun getBoolean(key: String, defaultValue: Boolean): Boolean
 
     fun putBoolean(key: String, value: Boolean)

@@ -49,7 +49,7 @@ class StorageTest {
     }
 
     @Test
-    fun `should get int from shared preferences when getting string`() {
+    fun `should get int from shared preferences when getting int`() {
         //given
         every { preferences.getInt(any(), any()) } returns 0
         //when
@@ -59,7 +59,7 @@ class StorageTest {
     }
 
     @Test
-    fun `should put int in shared preferences when putting string`() {
+    fun `should put int in shared preferences when putting int`() {
         //given
         every { editor.putInt(any(), any()) } returns editor
         //when
@@ -69,7 +69,7 @@ class StorageTest {
     }
 
     @Test
-    fun `should get long from shared preferences when getting string`() {
+    fun `should get long from shared preferences when getting long`() {
         //given
         every { preferences.getLong(any(), any()) } returns 0
         //when
@@ -79,7 +79,7 @@ class StorageTest {
     }
 
     @Test
-    fun `should put long in shared preferences when putting string`() {
+    fun `should put long in shared preferences when putting long`() {
         //given
         every { editor.putLong(any(), any()) } returns editor
         //when
@@ -109,7 +109,28 @@ class StorageTest {
     }
 
     @Test
-    fun `should get boolean from shared preferences when getting string`() {
+    fun `should get long from shared preferences when getting double`() {
+        //given
+        every { preferences.getLong(any(), any()) } returns 0L
+        //when
+        storage.getDouble("", 0.0)
+        //then
+        verify { preferences.getLong("", 0L) }
+    }
+
+    @Test
+    fun `should put long in shared preferences when putting double`() {
+        //given
+        val value = 2.0
+        every { editor.putLong(any(), any()) } returns editor
+        //when
+        storage.putDouble("", value)
+        //then
+        verify { editor.putLong("", value.toRawBits()) }
+    }
+
+    @Test
+    fun `should get boolean from shared preferences when getting boolean`() {
         //given
         every { preferences.getBoolean(any(), any()) } returns true
         //when
@@ -119,7 +140,7 @@ class StorageTest {
     }
 
     @Test
-    fun `should put boolean in shared preferences when putting string`() {
+    fun `should put boolean in shared preferences when putting boolean`() {
         //given
         every { editor.putBoolean(any(), any()) } returns editor
         //when
