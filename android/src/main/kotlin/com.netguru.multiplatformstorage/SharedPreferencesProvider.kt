@@ -1,20 +1,17 @@
 package com.netguru.multiplatformstorage
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.preference.PreferenceManager
-import java.lang.ref.WeakReference
 
+@SuppressLint("StaticFieldLeak")
 object SharedPreferencesProvider {
 
-    internal var _context: WeakReference<Context>? = null
-
-    private val context: Context
-        get() = _context!!.get() ?: throw IllegalStateException("Context should be initialized")
-
+    internal lateinit var appContext: Context
 
     internal fun preferences(name: String? = null) = if (name == null) {
-        PreferenceManager.getDefaultSharedPreferences(context)
+        PreferenceManager.getDefaultSharedPreferences(appContext)
     } else {
-        context.getSharedPreferences(name, Context.MODE_PRIVATE)
+        appContext.getSharedPreferences(name, Context.MODE_PRIVATE)
     }
 }

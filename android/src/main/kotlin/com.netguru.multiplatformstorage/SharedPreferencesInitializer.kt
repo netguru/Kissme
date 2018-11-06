@@ -4,12 +4,11 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
-import java.lang.ref.WeakReference
 
 class SharedPreferencesInitializer : ContentProvider() {
 
     override fun onCreate(): Boolean {
-        SharedPreferencesProvider._context = WeakReference(context!!.applicationContext)
+        SharedPreferencesProvider.appContext = context!!.applicationContext
         return false
     }
 
