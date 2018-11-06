@@ -1,10 +1,15 @@
 apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-platform-android'
 
 android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 15
+    }
+
+    sourceSets.all {
+        it.java.srcDir "src/$it.name/kotlin"
     }
 }
 
