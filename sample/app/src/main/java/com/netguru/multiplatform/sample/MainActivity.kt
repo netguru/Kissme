@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(), MainView, AddItemDialogFragment.OnItem
         fabButton.setOnClickListener {
             AddItemDialogFragment.newInstance().show(supportFragmentManager, AddItemDialogFragment.TAG)
         }
-        presenter.getToDoList()
     }
 
     override fun onDestroy() {

@@ -14,9 +14,7 @@ class MainPresenter {
 
     fun attachView(view: MainView) {
         this.view = view
-        if (storage.contains(KEY_LIST)) {
-            toDoList.addAll(storage.getString(KEY_LIST, "")!!.split(STRING_LIST_SEPARATOR))
-        }
+        getToDoList()
     }
 
     fun detachView() {
@@ -32,7 +30,10 @@ class MainPresenter {
         }
     }
 
-    fun getToDoList() {
+    private fun getToDoList() {
+        if (storage.contains(KEY_LIST)) {
+            toDoList.addAll(storage.getString(KEY_LIST, "")!!.split(STRING_LIST_SEPARATOR))
+        }
         view!!.showToDoList(toDoList)
     }
 
