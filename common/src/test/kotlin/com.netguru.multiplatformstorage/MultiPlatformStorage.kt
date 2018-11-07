@@ -178,6 +178,42 @@ class MultiPlatformStorageTest : BaseTest() {
         }
     }
 
+    @Test
+    fun `should remove key from storage when remove called`() {
+        //given
+        storage.putString(STRING_KEY, STRING)
+        //when
+        storage.remove(STRING_KEY)
+        //then
+        assertFalse(storage.contains(STRING_KEY))
+    }
+
+    @Test
+    fun `should remove all keys from storage when clear called`() {
+        //given
+        with(storage) {
+            putString(STRING_KEY, STRING)
+            putInt(INT_KEY, INT)
+            putLong(LONG_KEY, LONG)
+            putFloat(FLOAT_KEY, FLOAT)
+            putDouble(DOUBLE_KEY, DOUBLE)
+            putBoolean(BOOLEAN_KEY, BOOLEAN)
+        }
+        //when
+        storage.clear()
+        //then
+        assertFalse {
+            with(storage) {
+                contains(STRING_KEY)
+                contains(INT_KEY)
+                contains(LONG_KEY)
+                contains(FLOAT_KEY)
+                contains(DOUBLE_KEY)
+                contains(BOOLEAN_KEY)
+            }
+        }
+    }
+
     companion object {
         private const val STRING = "some text"
         private const val STRING_KEY = "key:string"

@@ -45,4 +45,8 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     actual fun contains(key: String): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    actual fun remove(key: String) {}
+
+    actual fun clear() {}
 }
