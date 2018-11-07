@@ -6,6 +6,8 @@
       <module name="com.example.KotlinMultiplaformStorage.androidTest" target="1.6" />
       <module name="com.example.KotlinMultiplaformStorage.jvmMain" target="1.6" />
       <module name="com.example.KotlinMultiplaformStorage.jvmTest" target="1.6" />
+      <module name="com.example.sample.jvmMain" target="1.6" />
+      <module name="com.example.sample.jvmTest" target="1.6" />
       <module name="KotlinMultiplaformStorage.common.main" target="1.8" />
       <module name="KotlinMultiplaformStorage.common.test" target="1.8" />
     </bytecodeTargetLevel>
