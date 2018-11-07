@@ -1,0 +1,18 @@
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "kotlin-multiplatform") {
+                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            }
+        }
+    }
+}
+rootProject.name = 'sample'
+
+include ':app'
+include ':common'
+project(':common').projectDir = new File('../common')
+include ':android'
+project(':android').projectDir = new File('../android')
+include ':ios'
+project(':ios').projectDir = new File('../ios')
