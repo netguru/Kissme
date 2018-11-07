@@ -36,6 +36,10 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     actual fun putBoolean(key: String, value: Boolean) = preferences.edit { putBoolean(key, value) }
 
     actual fun contains(key: String): Boolean = preferences.contains(key)
+
+    actual fun remove(key: String) = preferences.edit { remove(key) }
+
+    actual fun clear() = preferences.edit { clear() }
 }
 
 private inline fun SharedPreferences.edit(action: SharedPreferences.Editor.() -> Unit) = with(edit()) {

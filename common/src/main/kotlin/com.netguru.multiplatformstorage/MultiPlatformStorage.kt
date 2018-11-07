@@ -29,4 +29,8 @@ expect class MultiPlatformStorage(name: String? = null) {
     fun putBoolean(key: String, value: Boolean)
 
     fun contains(key: String): Boolean
+
+    fun remove(key: String)
+
+    fun clear()
 }

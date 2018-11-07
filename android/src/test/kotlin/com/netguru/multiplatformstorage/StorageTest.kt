@@ -158,4 +158,24 @@ class StorageTest {
         //then
         verify { preferences.contains("") }
     }
+
+    @Test
+    fun `should remove key from shared preferences contains when removing key`() {
+        //given
+        every { editor.remove(any()) } returns editor
+        //when
+        storage.remove("")
+        //then
+        verify { editor.remove("") }
+    }
+
+    @Test
+    fun `should clear shared preferences contains when clear called`() {
+        //given
+        every { editor.clear() } returns editor
+        //when
+        storage.clear()
+        //then
+        verify { editor.clear() }
+    }
 }
