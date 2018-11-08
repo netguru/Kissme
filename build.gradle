@@ -13,10 +13,15 @@ allprojects {
             classpath "com.android.tools.build:gradle:3.2.1"
         }
     }
-    allprojects {
-        repositories {
-            google()
-            jcenter()
+    repositories {
+        google()
+        jcenter()
+    }
+
+    tasks.withType(Test) {
+        testLogging {
+            showStandardStreams = true
+            events 'passed', 'failed'
         }
     }
 }

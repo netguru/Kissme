@@ -3,7 +3,6 @@ apply plugin: "kotlin-platform-native"
 sourceSets {
     main {
         component {
-            baseName.set("KotlinMultiplatformStorage-ios")
             targets = ['ios_arm64', 'ios_x64']
             outputKinds = [KLIBRARY]
         }
