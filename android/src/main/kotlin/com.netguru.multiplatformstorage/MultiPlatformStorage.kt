@@ -2,6 +2,13 @@ package com.netguru.multiplatformstorage
 
 import android.content.SharedPreferences
 
+/**
+ * Actual key-value data storage Android implementation.
+ * It uses [SharedPreferences] under the hood.
+ * [SharedPreferences] are initialized automatically by using [SharedPreferencesProvider].
+ * Whether [name] parameter is specified, it uses named [SharedPreferences].
+ * In other cases, default [SharedPreferences] instance will be used.
+ */
 actual class MultiPlatformStorage actual constructor(name: String?) {
 
     private val preferences: SharedPreferences by lazy {
