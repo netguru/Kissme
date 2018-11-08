@@ -7,7 +7,6 @@ import android.content.SharedPreferences
  * It uses [SharedPreferences] under the hood.
  * [SharedPreferences] are initialized automatically by using [SharedPreferencesProvider].
  * When [name] parameter is specified it will be used to retrieve named shared prefs instance else default shared prefs will be used.
- * In other cases, default [SharedPreferences] instance will be used.
  */
 actual class MultiPlatformStorage actual constructor(name: String?) {
 
