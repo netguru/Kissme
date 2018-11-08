@@ -5,7 +5,11 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 
-class SharedPreferencesInitializer : ContentProvider() {
+/**
+ * [ContentProvider] which provides Application [android.content.Context] for [SharedPreferencesProvider].
+ * Context will be provided automatically when Application starts.
+ */
+internal class SharedPreferencesInitializer : ContentProvider() {
 
     override fun onCreate(): Boolean {
         SharedPreferencesProvider.appContext = context!!.applicationContext
