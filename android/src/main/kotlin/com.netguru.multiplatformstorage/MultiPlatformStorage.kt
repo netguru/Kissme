@@ -6,7 +6,7 @@ import android.content.SharedPreferences
  * Actual key-value data storage Android implementation.
  * It uses [SharedPreferences] under the hood.
  * [SharedPreferences] are initialized automatically by using [SharedPreferencesProvider].
- * Whether [name] parameter is specified, it uses named [SharedPreferences].
+ * When [name] parameter is specified it will be used to retrieve named shared prefs instance else default shared prefs will be used.
  * In other cases, default [SharedPreferences] instance will be used.
  */
 actual class MultiPlatformStorage actual constructor(name: String?) {
