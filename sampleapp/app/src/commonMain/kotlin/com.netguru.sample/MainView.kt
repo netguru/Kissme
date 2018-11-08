@@ -1,4 +1,4 @@
-package com.netguru.multiplatform.sample
+package com.netguru.sample
 
 interface MainView {
 

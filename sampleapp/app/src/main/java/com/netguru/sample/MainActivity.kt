@@ -1,4 +1,4 @@
-package com.netguru.multiplatform.sample
+package com.netguru.sample
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar

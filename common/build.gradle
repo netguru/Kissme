@@ -1,7 +1,16 @@
 apply plugin: "kotlin-platform-common"
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId "kotlinmultiplatformstorage-common"
+        }
+    }
+}
+
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-annotations-common:$kotlin_version"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-annotations-common"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-common"
 }

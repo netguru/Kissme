@@ -3,14 +3,9 @@ apply plugin: "kotlin-platform-native"
 sourceSets {
     main {
         component {
+            baseName.set("kotlinmultiplatformstorage-ios")
             targets = ['ios_arm64', 'ios_x64']
             outputKinds = [KLIBRARY]
-        }
-    }
-
-    test {
-        component {
-            targets = ['ios_x64']
         }
     }
 }
@@ -18,3 +13,4 @@ sourceSets {
 dependencies {
     expectedBy project(':common')
 }
+

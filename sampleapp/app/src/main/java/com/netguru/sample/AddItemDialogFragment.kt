@@ -1,4 +1,4 @@
-package com.netguru.multiplatform.sample
+package com.netguru.sample
 
 import android.app.Dialog
 import android.content.Context
