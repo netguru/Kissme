@@ -21,9 +21,9 @@ publishing {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion androidCompileSdkVersion
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion androidMinSdkVersion
     }
     testOptions.unitTests.includeAndroidResources = true
 
