@@ -1,11 +1,29 @@
 apply plugin: 'com.android.library'
-apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-platform-android'
 
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+publishing {
+    publications {
+        android(MavenPublication) {
+            artifact("$buildDir/outputs/aar/android-release.aar")
+            artifact sourcesJar
+            artifactId 'kotlinmultiplatformstorage-android'
+        }
+    }
+}
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion androidCompileSdkVersion
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion androidMinSdkVersion
     }
     testOptions.unitTests.includeAndroidResources = true
 
