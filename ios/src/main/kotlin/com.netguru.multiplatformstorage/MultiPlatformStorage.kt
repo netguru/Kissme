@@ -6,7 +6,7 @@ import platform.Foundation.*
 import platform.Security.*
 import platform.darwin.OSStatus
 
-class MultiPlatformStorage {
+actual class MultiPlatformStorage {
 
     private val SecClass = kSecClass as CFStringRef
     private val SecAttrService = kSecAttrService as CFStringRef
@@ -19,13 +19,15 @@ class MultiPlatformStorage {
     private val SecAttrAccessible = kSecAttrAccessible as CFStringRef
     private var SecReturnAttributes = kSecReturnAttributes as CFStringRef
 
+    actual constructor(name: String?)
+
     var accessGroup: NSString? = null
         private set
 
     var serviceName: String = ""
     private set
 
-    fun getAll(): Map<String, *> {
+    actual fun getAll(): Map<String, *> {
 
         val keychainQueryMap: MutableMap<CFStringRef, Any?> = mutableMapOf()
 
@@ -39,9 +41,9 @@ class MultiPlatformStorage {
         }
 
         val result: CValuesRef<CFTypeRefVar>? = null
-        val status = SecItemCopyMatching(keychainQueryMap as CFDictionaryRef, result)
+        val status = SecItemCopyMatching((keychainQueryMap as NSDictionary) as CFDictionaryRef, result)
 
-        if (status != errSecSuccess) else {
+        if (status != errSecSuccess) {
             return emptyMap<String, Any>()
         }
 
@@ -58,14 +60,14 @@ class MultiPlatformStorage {
         return values
     }
 
-    fun getString(key: String, defaultValue: String?): String? {
+    actual fun getString(key: String, defaultValue: String?): String? {
         data(key = key as NSString)?.let {
             NSString.stringEncodingForData(data = it, encodingOptions = null, convertedString = null, usedLossyConversion = null)
         }
-        return ""
+        return null
     }
 
-    fun putString(key: String, value: String) {
+    actual fun putString(key: String, value: String) {
         val key = key as NSString
         val value = value as NSString
 
@@ -74,72 +76,86 @@ class MultiPlatformStorage {
         }
     }
 
-    fun getInt(key: String, defaultValue: Int?): Int? {
+    actual fun getInt(key: String, defaultValue: Int): Int {
         val key = key as NSString
 
         val numberValue = objectForKey(key = key) as? NSNumber
         numberValue?.let {
             return it.intValue
         }
-        return null
+        return 0
     }
 
-    fun putInt(key: String, value: Int) {
+    actual fun putInt(key: String, value: Int) {
         set(value = NSNumber(value), key = key as NSString)
     }
 
-    fun getLong(key: String, defaultValue: Long?): Long? {
+    actual fun getLong(key: String, defaultValue: Long): Long {
         val key = key as NSString
 
         val numberValue = objectForKey(key = key) as? NSNumber
         numberValue?.let {
             return it.longValue
         }
-        return null
+        return 0
     }
 
-    fun putLong(key: String, value: Long) {
+    actual fun putLong(key: String, value: Long) {
         set(value = NSNumber(long = value), key = key as NSString)
     }
 
-    fun getFloat(key: String, defaultValue: Float?): Float? {
+    actual fun getFloat(key: String, defaultValue: Float): Float {
         val key = key as NSString
 
         val numberValue = objectForKey(key = key) as? NSNumber
         numberValue?.let {
             return it.floatValue
         }
-        return null
+        return Float.NaN
     }
 
-    fun putFloat(key: String, value: Float) {
+    actual fun putFloat(key: String, value: Float) {
         set(value = NSNumber(value), key = key as NSString)
     }
 
-    fun getBoolean(key: String, defaultValue: Boolean?): Boolean? {
+    actual fun getDouble(key: String, defaultValue: Double): Double {
+        val key = key as NSString
+
+        val numberValue = objectForKey(key = key) as? NSNumber
+        numberValue?.let {
+            return it.doubleValue
+        }
+        return 0.0
+    }
+
+    actual fun putDouble(key: String, value: Double) {
+        set(value = NSNumber(value), key = key as NSString)
+    }
+
+    actual fun getBoolean(key: String, defaultValue: Boolean): Boolean {
         val key = key as NSString
 
         val numberValue = objectForKey(key = key) as? NSNumber
         numberValue?.let {
             return it.boolValue
         }
-        return null
+        return false
     }
 
-    fun putBoolean(key: String, value: Boolean) {
+    actual fun putBoolean(key: String, value: Boolean) {
         set(value = value, key = key as NSString)
     }
 
-    fun contains(key: String): Boolean {
+    actual fun contains(key: String): Boolean {
         val key = key as NSString
         return data(key = key)?.let { true } ?: false
     }
 
-    fun remove(key: String) {
+    actual fun remove(key: String) {
         removeObject(key = key as NSString)
     }
 
-    fun clear() {
+    actual fun clear() {
         deleteKeychainSecClass(secClass = kSecClassGenericPassword)
         deleteKeychainSecClass(secClass = kSecClassInternetPassword)
         deleteKeychainSecClass(secClass = kSecClassCertificate)
