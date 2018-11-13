@@ -7,12 +7,8 @@ pluginManagement {
         }
     }
 }
-rootProject.name = 'sample'
+enableFeaturePreview('GRADLE_METADATA')
+
+rootProject.name = 'sampleapp'
 
 include ':app'
-include ':common'
-project(':common').projectDir = new File('../common')
-include ':android'
-project(':android').projectDir = new File('../android')
-include ':ios'
-project(':ios').projectDir = new File('../ios')
