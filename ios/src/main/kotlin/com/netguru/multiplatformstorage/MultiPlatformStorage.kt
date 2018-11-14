@@ -47,7 +47,7 @@ actual class MultiPlatformStorage {
             return emptyMap<String, Any>()
         }
 
-        var values = mutableMapOf<String, Any>()
+        var values = (mutableMapOf<String, Any>()) as  NSDictionary
         val dictionaryResult = result as Array<NSDictionary>
 
         for (attribute in dictionaryResult) {
@@ -160,7 +160,7 @@ actual class MultiPlatformStorage {
         deleteKeychainSecClass(secClass = kSecClassInternetPassword)
         deleteKeychainSecClass(secClass = kSecClassCertificate)
         deleteKeychainSecClass(secClass = kSecClassKey)
-        deleteKeychainSecClass(secClass = kSecClassIdentity) // Identity items
+        deleteKeychainSecClass(secClass = kSecClassIdentity)
     }
 
     private fun deleteKeychainSecClass(secClass: CFStringRef?): Boolean {
