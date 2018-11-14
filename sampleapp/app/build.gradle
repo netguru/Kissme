@@ -43,19 +43,19 @@ kotlin {
         commonMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
-                implementation 'com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-common:0.0.1'
+                implementation "com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-common:$libraryVersion"
             }
         }
         androidMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-                implementation 'com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-android:0.0.1'
+                implementation "com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-android:$libraryVersion"
             }
         }
 
         iosMain {
             dependencies {
-                implementation 'com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-ios:0.0.1'
+                implementation "com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-ios:$libraryVersion"
             }
         }
     }
