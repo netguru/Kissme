@@ -66,13 +66,6 @@ actual class MultiPlatformStorage {
 
     actual fun getString(key: String, defaultValue: String?): String? {
 
-
-//
-//        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = kCFBooleanTrue, value = value)
-//        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = value)
-//
-
-//
         data(key = key)?.let {
             return NSString.create(it, NSUTF8StringEncoding) as String?
         }
@@ -85,10 +78,12 @@ actual class MultiPlatformStorage {
         val key = key
         val cValue = CFStringCreateWithCString(null, cStr = value, encoding = kCFStringEncodingMacRoman)
 
-//        value.dataUsingEncoding(NSUTF8StringEncoding)?.let {
-        set(value = cValue!!, key = key)
+        val keychainQueryDictionary = setupKeychainQueryDictionary(forKey = key)
+        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = cValue)
+        val status: OSStatus = SecItemAdd(keychainQueryDictionary, null)
 
-//        }
+        print("set status -  ${status}")
+
     }
     //
     actual fun getInt(key: String, defaultValue: Int): Int {
@@ -210,14 +205,13 @@ actual class MultiPlatformStorage {
 //    }
 
     private fun set(value: CValuesRef<*>, key: String?): String {
-        val keychainQueryDictionary = setupKeychainQueryDictionary(forKey = key)
-
+        val keychainQueryDictionary = setupKeychain(forKey = key)
 
         CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = value)
-        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = value)
-
 
         val status: OSStatus = SecItemAdd(keychainQueryDictionary, null)
+
+        print("set status -  ${status}")
 
 //        if (status == errSecSuccess) {
 //            return true
@@ -226,7 +220,6 @@ actual class MultiPlatformStorage {
 //        } else {
 //            return false
 //        }
-        print("${status}")
         return "${status}"
     }
 
@@ -239,23 +232,41 @@ actual class MultiPlatformStorage {
         val result: CValuesRef<CFTypeRefVar>? = null
         val status = SecItemCopyMatching(keychainQueryDictionary, result)
 
+        print("result: - ${result}, ")
+        print("status: - ${status}, ")
+
         if (status == 0) {
             print("data0")
-            return null
-        } else {
             return interpretObjCPointer<NSData>(result.objcPtr())
+        } else {
+            return null
         }
+
+//        return if (status == 0)  else null
     }
 
 //    private fun objectForKey(key: String?): NSCodingProtocol? = data(key = key)?.let {
 //        NSKeyedUnarchiver.unarchiveObjectWithData(data = it) as? NSCodingProtocol
 //    }
 
+    private fun setupKeychain(forKey: String?): CFMutableDictionaryRef? {
+        val keychain = CFDictionaryCreateMutable(allocator = null, capacity = 0, keyCallBacks = null, valueCallBacks = null)
+
+        val valueKey = CFStringCreateWithCString(null, cStr = forKey, encoding = kCFStringEncodingMacRoman)
+
+        CFDictionaryAddValue(theDict = keychain, key = SecClass, value = kSecClassGenericPassword)
+        CFDictionaryAddValue(theDict = keychain, key = SecAttrService, value = valueKey)
+        CFDictionaryAddValue(theDict = keychain, key = SecAttrAccount, value = valueKey)
+        CFDictionaryAddValue(theDict = keychain, key = SecAttrAccessible, value = kSecAttrAccessibleAfterFirstUnlock)
+
+        return keychain
+    }
+
     private fun setupKeychainQueryDictionary(forKey: String?): CFMutableDictionaryRef? {
 
         val keychainQueryDictionary = CFDictionaryCreateMutable(allocator = null, capacity = 0, keyCallBacks = null, valueCallBacks = null)
 
-        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecClass, value = kSecClass)
+        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecClass, value = kSecClassGenericPassword)
         CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecAttrService, value = kSecAttrService)
 
         accessGroup?.let {
