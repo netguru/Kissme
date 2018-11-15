@@ -1,6 +1,9 @@
 package com.netguru.multiplatformstorage
 
 import kotlinx.cinterop.CValuesRef
+import kotlinx.cinterop.interpretCPointer
+import kotlinx.cinterop.interpretObjCPointer
+import kotlinx.cinterop.objcPtr
 import platform.CoreFoundation.*
 import platform.Foundation.*
 import platform.Security.*
@@ -62,21 +65,32 @@ actual class MultiPlatformStorage {
     }
 
     actual fun getString(key: String, defaultValue: String?): String? {
-//        data(key = key as NSString)?.let {
-//            NSString.stringEncodingForData(data = it, encodingOptions = null, convertedString = null, usedLossyConversion = null)
-//        }
-        return ""
+
+
+//
+//        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = kCFBooleanTrue, value = value)
+//        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = value)
+//
+
+//
+        data(key = key)?.let {
+            return NSString.create(it, NSUTF8StringEncoding) as String?
+        }
+
+        return "nie dziala"
     }
 
     actual fun putString(key: String, value: String) {
+
         val key = key
-        val value = value as CFStringRef
+        val cValue = CFStringCreateWithCString(null, cStr = value, encoding = kCFStringEncodingMacRoman)
 
 //        value.dataUsingEncoding(NSUTF8StringEncoding)?.let {
-            set(value = value, key = key)
+        set(value = cValue!!, key = key)
+
 //        }
     }
-//
+    //
     actual fun getInt(key: String, defaultValue: Int): Int {
 //        val key = key as NSString
 //
@@ -86,11 +100,11 @@ actual class MultiPlatformStorage {
 //        }
         return 0
     }
-//
+    //
     actual fun putInt(key: String, value: Int) {
 //        set(value = NSNumber(value), key = key as NSString)
     }
-//
+    //
     actual fun getLong(key: String, defaultValue: Long): Long {
 //        val key = key as NSString
 //
@@ -150,7 +164,7 @@ actual class MultiPlatformStorage {
     actual fun contains(key: String): Boolean {
 //        val key = key as NSString
 //        return data(key = key)?.let { true } ?: false
-        return false
+        return true
     }
 
     actual fun remove(key: String) {
@@ -199,9 +213,9 @@ actual class MultiPlatformStorage {
         val keychainQueryDictionary = setupKeychainQueryDictionary(forKey = key)
 
 
+        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = value)
+        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = value)
 
-        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = value)
-        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = value)
 
         val status: OSStatus = SecItemAdd(keychainQueryDictionary, null)
 
@@ -212,20 +226,26 @@ actual class MultiPlatformStorage {
 //        } else {
 //            return false
 //        }
+        print("${status}")
         return "${status}"
     }
 
-//    private fun data(key: String?): NSData? {
-//        val keychainQueryDictionary = setupKeychainQueryDictionary(forKey = key)
-//
-//        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecMatchLimit, value = kSecMatchLimitOne)
-//        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecReturnData, value = kCFBooleanTrue)
-//
-//        val result: CValuesRef<CFTypeRefVar>? = null
-//        val status = SecItemCopyMatching(keychainQueryDictionary, result)
-//
-//        return if (status == 0) result else null
-//    }
+    private fun data(key: String?): NSData? {
+        val keychainQueryDictionary = setupKeychainQueryDictionary(forKey = key)
+
+        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecMatchLimit, value = kSecMatchLimitOne)
+        CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecReturnData, value = kCFBooleanTrue)
+
+        val result: CValuesRef<CFTypeRefVar>? = null
+        val status = SecItemCopyMatching(keychainQueryDictionary, result)
+
+        if (status == 0) {
+            print("data0")
+            return null
+        } else {
+            return interpretObjCPointer<NSData>(result.objcPtr())
+        }
+    }
 
 //    private fun objectForKey(key: String?): NSCodingProtocol? = data(key = key)?.let {
 //        NSKeyedUnarchiver.unarchiveObjectWithData(data = it) as? NSCodingProtocol
