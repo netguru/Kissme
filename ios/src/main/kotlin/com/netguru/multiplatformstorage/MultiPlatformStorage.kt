@@ -70,7 +70,7 @@ actual class MultiPlatformStorage {
 
     actual fun putString(key: String, value: String) {
         val key = key
-        val value = value
+        val value = value as CFStringRef
 
 //        value.dataUsingEncoding(NSUTF8StringEncoding)?.let {
             set(value = value, key = key)
@@ -195,8 +195,10 @@ actual class MultiPlatformStorage {
 //        return false
 //    }
 
-    private fun set(value: String, key: String?): String {
+    private fun set(value: CValuesRef<*>, key: String?): String {
         val keychainQueryDictionary = setupKeychainQueryDictionary(forKey = key)
+
+
 
         CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = value)
         CFDictionaryAddValue(theDict = keychainQueryDictionary, key = SecValueData, value = value)
