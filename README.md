@@ -99,7 +99,9 @@ using application `Context` which is provided automatically by `ContentProvider`
 
 ### iOS
 
-TODO
+As we all know `UserDefaults` isn't best place to store app secrets, that's why iOS implementation is using native iOS Keychain. Security Enclave is a hardware-based key manager that's isolated from processor. It allows you to store, delete, fetch passwords and accounts. 
+
+`Keychain` is simple wrapper build upon `Security` interface to store, save, and fetch not only passwords, but also accounts.
 
 ## Running sample app
 Sample app uses Maven Local for resolving `KotlinMultiPlatformStorage` dependencies. Before running sample app you need to:
