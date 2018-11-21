@@ -1,5 +1,7 @@
 package com.netguru.multiplatformstorage
 
+import com.netguru.keychainWrapper.*
+
 actual class MultiPlatformStorage actual constructor(name: String?) {
 
     actual fun getAll(): Map<String, *> {
@@ -48,5 +50,7 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
 
     actual fun remove(key: String) {}
 
-    actual fun clear() {}
+    actual fun clear() {
+
+    }
 }

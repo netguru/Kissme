@@ -1,11 +1,19 @@
-apply plugin: "kotlin-platform-native"
+apply plugin: 'org.jetbrains.kotlin.platform.native'
+sourceSets.main {
+    kotlin.srcDirs += 'src/main/kotlin'
+}
 
-sourceSets {
-    main {
-        component {
-            baseName.set("kotlinmultiplatformstorage-ios")
-            targets = ['ios_arm64', 'ios_x64']
-            outputKinds = [KLIBRARY]
+components.main {
+    targets = ['ios_arm64', 'ios_x64']
+    outputKinds = [KLIBRARY]
+    baseName = "kotlinmultiplatformstorage-ios"
+
+    dependencies {
+        cinterop("KeychainWrapper"){
+            packageName "com.netguru.keychainWrapper"
+            includeDirs{
+                allHeaders "./KeychainWrapper.framework/Headers"
+            }
         }
     }
 }
