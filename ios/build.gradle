@@ -11,9 +11,10 @@ components.main {
     dependencies {
         cinterop("KeychainWrapper"){
             packageName "com.netguru.keychainWrapper"
-            includeDirs{
+            includeDirs {
                 allHeaders "./KeychainWrapper.framework/Headers"
             }
+            linkerOpts "-F${projectDir}"
         }
     }
 }
