@@ -6,23 +6,23 @@
 	<dict>
 		<key>Headers/Keychain.h</key>
 		<data>
-		bJ7TsOpSwLVuq3rfw6T2I2zrUrA=
+		evNEiKLqbjcc2rnUgK4mm0rb964=
 		</data>
 		<key>Headers/KeychainQuery.h</key>
 		<data>
-		3WS8tKlt6Yva37wBoTciFETM9w0=
+		AYexosq2QK4K0jXiMQZjECp1HKA=
 		</data>
-		<key>Headers/KeychainWrapper.h</key>
+		<key>Headers/keychainWrapper.h</key>
 		<data>
-		i3vCE8nKPIOs9ceYIFk5+Hl6VdY=
+		/arpaE7Jaer1zPoS3HzcDj1t3PE=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		PLx7q0hzjfFr8IJkflzA+oWKRBI=
+		6MSl1SvBBQS8v+wN4hSWjrtjvYI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		g2VYa/0Wvv5HOE2cXSl2bMzvJqY=
+		T51u9gpCU3uoaTOrFiJye+SJLJ0=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -31,28 +31,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6PnDbgHPq7qh4Pmq/ie6m23WFTK7hwdIPHTzZP6ZSgo=
+			Rba4qVyEL+mIAWCs/pFT2LOYkVYv7lu/HTQa+xsQ1+0=
 			</data>
 		</dict>
 		<key>Headers/KeychainQuery.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			kBqON9qgednOk36UolFok+V2yBWY3M1DJLDAPSNwjFA=
+			E0OnkErZ6FqPG+cQ1QugSECB6IhD8Fq/DFbvhHCzIUw=
 			</data>
 		</dict>
-		<key>Headers/KeychainWrapper.h</key>
+		<key>Headers/keychainWrapper.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			uTtFmVWx64XxqNU5Y4ltkPeC7pGT2Vq5VAKaHiGHmr8=
+			vIcCDyrusrJHt6wBZCFeFArWnU4KwBHSJ4DwtvFfmWM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			H8uTOqHTKy/dapksJkkGG1ZRNlUwCzk6Ean9688ZpMQ=
+			DQiWh4QoSEuugJyAcP5m2oj/gTFsl5RkmLeG+UTzgos=
 			</data>
 		</dict>
 	</dict>

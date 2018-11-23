@@ -1,5 +1,12 @@
+
 #import <Foundation/Foundation.h>
 #import <Security/Security.h>
+
+typedef NS_ENUM(NSUInteger, SAMKeychainQuerySynchronizationMode) {
+	SAMKeychainQuerySynchronizationModeAny,
+	SAMKeychainQuerySynchronizationModeNo,
+	SAMKeychainQuerySynchronizationModeYes
+};
 
 @interface KeychainQuery : NSObject
 
@@ -18,8 +25,6 @@
 
 - (BOOL)fetch;
 
-- (void)clear;
+- (BOOL)clear;
 
 @end
-
-
