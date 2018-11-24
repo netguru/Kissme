@@ -35,7 +35,7 @@ kotlin {
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? presets.iosArm64 : presets.iosX64
 
         fromPreset(presets.android, 'android')
-        fromPreset(iOSTarget, 'ios') {
+        fromPreset(presets.iosArm64, 'ios') {
             compilations.main.outputKinds('FRAMEWORK')
         }
     }
