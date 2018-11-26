@@ -1,19 +1,19 @@
 //
-//  keychainWrapper.h
-//  keychainWrapper
+//  keychainwrapper.h
+//  keychainwrapper
 //
-//  Created by Sebastian on 23/11/2018.
+//  Created by Sebastian on 26/11/2018.
 //  Copyright © 2018 Sebastian. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for keychainWrapper.
-FOUNDATION_EXPORT double keychainWrapperVersionNumber;
+//! Project version number for keychainwrapper.
+FOUNDATION_EXPORT double keychainwrapperVersionNumber;
 
-//! Project version string for keychainWrapper.
-FOUNDATION_EXPORT const unsigned char keychainWrapperVersionString[];
+//! Project version string for keychainwrapper.
+FOUNDATION_EXPORT const unsigned char keychainwrapperVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <keychainWrapper/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <keychainwrapper/PublicHeader.h>
 
 

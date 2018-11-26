@@ -1,19 +1,6 @@
-//
-//  SAMKeychainQuery.h
-//  SAMKeychain
-//
-//  Created by Caleb Davenport on 3/19/13.
-//  Copyright (c) 2013-2014 Sam Soffes. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 #import <Security/Security.h>
-
-typedef NS_ENUM(NSUInteger, SAMKeychainQuerySynchronizationMode) {
-	SAMKeychainQuerySynchronizationModeAny,
-	SAMKeychainQuerySynchronizationModeNo,
-	SAMKeychainQuerySynchronizationModeYes
-};
 
 @interface KeychainQuery : NSObject
 

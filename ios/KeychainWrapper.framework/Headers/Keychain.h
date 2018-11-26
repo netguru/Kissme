@@ -4,7 +4,7 @@
 #import "KeychainQuery.h"
 
 typedef NS_ENUM(OSStatus, SAMKeychainErrorCode) {
-	SAMKeychainErrorBadArguments = -1001,
+	KeychainErrorBadArguments = -1001,
 };
 
 extern NSString *const kKeychainErrorDomain;
