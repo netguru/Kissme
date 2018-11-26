@@ -8,6 +8,7 @@
 
 import UIKit
 import app
+import keychainwrapper
 
 class ViewController: UIViewController {
     
@@ -16,8 +17,10 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         presenter.addNewToDoElement(item: "ok")
+        
     }
     
     
