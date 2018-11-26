@@ -4,6 +4,8 @@ import com.netguru.keychainWrapper.*
 actual class MultiPlatformStorage actual constructor(name: String?) {
 
     actual fun getAll(): Map<String, *> {
+        val ok = Keychain.accountsForService(serviceName="ok12")
+        print(ok)
         return mapOf<String, String>()
     }
 

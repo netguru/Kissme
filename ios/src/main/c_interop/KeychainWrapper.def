@@ -1,4 +1,5 @@
 language = Objective-C
 headers = Keychain.h KeychainQuery.h KeychainWrapper.h
-compilerOpts = -framework KeychainWrapper
-linkerOpts = -F/Users/unclesam/Documents/Programming/Netguru/KotlinEverywhere/KotlinMultiplatformStorage/ios -framework KeychainWrapper
+compilerOpts = -framework keychainwrapper
+linkerOpts = -F/Users/sebastian/Documents/Projekty/KotlinMultiplatformStorage/ios -framework keychainwrapper
+excludeDependentModules = true
