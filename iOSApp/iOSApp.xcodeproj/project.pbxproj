@@ -181,7 +181,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"/Users/sebastian/Documents/Projekty/KotlinMultiplatformStorage/sampleapp/app/build/xcode-frameworks\"\n./gradlew :app:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
+			shellScript = "cd \"${PROJECT_DIR}/../sampleapp/app/build/xcode-frameworks\"\n./gradlew :app:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
