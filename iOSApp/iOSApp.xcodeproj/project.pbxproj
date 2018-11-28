@@ -104,10 +104,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9EE04B9E21A5D9DD00FB164D /* Build configuration list for PBXNativeTarget "iOSApp" */;
 			buildPhases = (
+				9EE04BA521A5DA8C00FB164D /* ShellScript */,
 				9EE04B8821A5D9DB00FB164D /* Sources */,
 				9EE04B8921A5D9DB00FB164D /* Frameworks */,
 				9EE04B8A21A5D9DB00FB164D /* Resources */,
-				9EE04BA521A5DA8C00FB164D /* ShellScript */,
 				9E9348B521ABFB1E00BFC0A6 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -181,7 +181,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"${PROJECT_DIR}/../sampleapp/app/build/xcode-frameworks\"\n./gradlew :app:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
+			shellScript = "cd \"${PROJECT_DIR}/../sampleapp\"\n./gradlew :app:clean\n./gradlew :app:build\n./gradlew :app:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\ncd \"${PROJECT_DIR}/../sampleapp/app/build/xcode-frameworks\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
