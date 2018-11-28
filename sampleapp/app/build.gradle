@@ -1,6 +1,4 @@
-plugins {
-    id 'kotlin-multiplatform' version '1.3.0'
-}
+apply plugin: 'kotlin-multiplatform'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 
@@ -33,7 +31,8 @@ dependencies {
 kotlin {
     targets {
         final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? presets.iosArm64 : presets.iosX64
-
+        println("SDK_NAME="+System.getenv('SDK_NAME'))
+        println("iOSTarget="+iOSTarget.name)
         fromPreset(presets.android, 'android')
         fromPreset(iOSTarget, 'ios') {
             compilations.main.outputKinds('FRAMEWORK')
@@ -82,4 +81,5 @@ kotlin {
         }
     }
 }
+
 tasks.build.dependsOn packForXCode
