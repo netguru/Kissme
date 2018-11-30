@@ -10,6 +10,9 @@
 @property (nonatomic, copy, nullable) id<NSCoding> passwordObject;
 @property (nonatomic, copy, nullable) NSString *password;
 
+- (instancetype)initWithService:(NSString *)service
+                        account:(NSString *)account;
+
 - (BOOL)save;
 
 - (BOOL)deleteItem;
