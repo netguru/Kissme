@@ -26,7 +26,6 @@ NSString *const kKeychainWhereKey = @"svce";
     query.service = serviceName;
     query.account = account;
     [query fetch];
-    
     return query.passwordData;
 }
 

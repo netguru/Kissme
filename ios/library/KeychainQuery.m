@@ -29,7 +29,8 @@
 		status = SecItemAdd((__bridge CFDictionaryRef)query, NULL);
 	}
 
-	return (status == errSecSuccess);}
+	return (status == errSecSuccess);
+}
 
 
 - (BOOL)deleteItem {
