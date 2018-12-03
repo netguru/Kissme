@@ -1,6 +1,5 @@
 
 #import <Foundation/Foundation.h>
-#import <Security/Security.h>
 
 @interface KeychainQuery : NSObject
 
@@ -11,6 +10,9 @@
 @property (nonatomic, copy, nullable) id<NSCoding> passwordObject;
 @property (nonatomic, copy, nullable) NSString *password;
 
+- (instancetype)initWithService:(NSString *)service
+                        account:(NSString *)account;
+
 - (BOOL)save;
 
 - (BOOL)deleteItem;
@@ -20,5 +22,7 @@
 - (BOOL)fetch;
 
 - (BOOL)clear;
+
+- (BOOL)contains;
 
 @end
