@@ -49,6 +49,10 @@ class MainViewController: UIViewController, MainView {
         tableView.reloadData()
     }
     
+    deinit {
+        presenter.detachView()
+    }
+    
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {

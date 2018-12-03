@@ -7,7 +7,7 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     private val serviceName: String = name ?: "defaultservice"
 
     actual fun getAll(): Map<String, *> {
-        val allPasswords = Keychain.getAllPasswordForService("defaultservice") ?: emptyMap<String, String>()
+        val allPasswords = Keychain.getAllPasswordForService(serviceName) ?: emptyMap<String, String>()
         return allPasswords
             .filter { it.key is String }
             .map {
@@ -29,7 +29,7 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     }
 
     actual fun putInt(key: String, value: Int) {
-        Keychain.setPassword(value.toString(), serviceName , account= key)
+        Keychain.setPassword(value.toString(), serviceName, account= key)
     }
 
     actual fun getLong(key: String, defaultValue: Long): Long {
@@ -37,7 +37,7 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     }
 
     actual fun putLong(key: String, value: Long) {
-        Keychain.setPassword(value.toString(),serviceName , account= key)
+        Keychain.setPassword(value.toString(),serviceName, account= key)
     }
 
     actual fun getFloat(key: String, defaultValue: Float): Float {
@@ -45,7 +45,7 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     }
 
     actual fun putFloat(key: String, value: Float) {
-        Keychain.setPassword(value.toString(), serviceName , key)
+        Keychain.setPassword(value.toString(), serviceName, key)
     }
 
     actual fun getDouble(key: String, defaultValue: Double): Double {
@@ -65,7 +65,7 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     }
 
     actual fun contains(key: String): Boolean {
-        return Keychain.containsForService(serviceName,key)
+        return Keychain.containsForService(serviceName, key)
     }
 
     actual fun remove(key: String) {
