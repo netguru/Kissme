@@ -96,3 +96,6 @@ fabric.properties
 
 # ios cinterop .def file
 /ios/src/main/c_interop/keychainwrapper.def
+
+# Build-time secrets
+secret.properties

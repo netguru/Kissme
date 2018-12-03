@@ -1,0 +1,38 @@
+// Configures publishing of Maven artifacts to Bintray
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+// ------------- tasks
+publishing {
+    repositories {
+        maven { url = 'https://dl.bintray.com/netguru/maven/' }
+    }
+}
+Properties properties = new Properties()
+properties.load(project.rootProject.file('secret.properties').newDataInputStream())
+def bintrayUser = properties.getProperty('bintrayUser')
+def apiKey = properties.getProperty('bintrayApiKey')
+bintray {
+    user bintrayUser
+    key apiKey
+    override = true // for multi-platform Kotlin/Native publishing
+    pkg {
+        repo = 'maven'
+        name = 'kotlinmultiplatformstorage'
+        publish = true
+        version {
+            name = project.version
+            vcsTag = project.version
+            released  = new Date()
+        }
+    }
+}
+// this is required for K/N publishing
+bintrayUpload.dependsOn publishToMavenLocal
+// This is for easier debugging of bintray uploading problems
+bintrayUpload.doFirst {
+    publications = project.publishing.publications.findAll { !it.name.contains('test') }.collect {
+        println("Uploading artifact '$it.groupId:$it.artifactId:$it.version' from publication '$it.name'")
+        it
+    }
+} 
