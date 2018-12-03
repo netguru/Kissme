@@ -31,7 +31,7 @@ class MainPresenter {
         }
     }
 
-    fun getToDoList() {
+    private fun getToDoList() {
         if (storage.contains(KEY_LIST)) {
             toDoList.addAll(storage.getString(KEY_LIST, "")!!.split(STRING_LIST_SEPARATOR))
         }
