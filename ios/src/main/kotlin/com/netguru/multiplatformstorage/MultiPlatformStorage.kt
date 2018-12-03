@@ -5,9 +5,15 @@ import platform.Foundation.*
 actual class MultiPlatformStorage actual constructor(name: String?) {
 
     actual fun getAll(): Map<String, *> {
-        val ok = Keychain.accountsForService(serviceName="ok12")
-        print(ok)
-        return mapOf<String, String>()
+//        return
+        val allPasswords = Keychain.getAllPasswordForService("defaultservice")
+        allPasswords!!
+            .filter { it.key is String }
+            .map {
+                it.key as String to it.value
+            }
+        return allPasswords
+//        return mapOf<String, String>()
     }
 
     actual fun getString(key: String, defaultValue: String?): String? {
