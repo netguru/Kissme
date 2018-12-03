@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E6026AE21AD6BF70018EAFB /* keychainwrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6026AD21AD6BF70018EAFB /* keychainwrapper.framework */; };
-		9E6026AF21AD6BF70018EAFB /* keychainwrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6026AD21AD6BF70018EAFB /* keychainwrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9E9348B321ABFB1E00BFC0A6 /* app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9348B221ABFB1E00BFC0A6 /* app.framework */; };
 		9E9348B421ABFB1E00BFC0A6 /* app.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9348B221ABFB1E00BFC0A6 /* app.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		9EE04B9021A5D9DB00FB164D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE04B8F21A5D9DB00FB164D /* AppDelegate.swift */; };
@@ -25,7 +23,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9E6026AF21AD6BF70018EAFB /* keychainwrapper.framework in Embed Frameworks */,
 				9E9348B421ABFB1E00BFC0A6 /* app.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -34,7 +31,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9E6026AD21AD6BF70018EAFB /* keychainwrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = keychainwrapper.framework; path = ../ios/keychainwrapper.framework; sourceTree = "<group>"; };
 		9E9348B221ABFB1E00BFC0A6 /* app.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = app.framework; path = "../sampleapp/app/build/xcode-frameworks/app.framework"; sourceTree = "<group>"; };
 		9EE04B8C21A5D9DB00FB164D /* iOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EE04B8F21A5D9DB00FB164D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +46,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E6026AE21AD6BF70018EAFB /* keychainwrapper.framework in Frameworks */,
 				9E9348B321ABFB1E00BFC0A6 /* app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,7 +64,6 @@
 		9EE04B8321A5D9DB00FB164D = {
 			isa = PBXGroup;
 			children = (
-				9E6026AD21AD6BF70018EAFB /* keychainwrapper.framework */,
 				9EE04B8E21A5D9DB00FB164D /* iOSApp */,
 				9EE04B8D21A5D9DB00FB164D /* Products */,
 				3C5B8C8921A958CF000582E7 /* Frameworks */,
