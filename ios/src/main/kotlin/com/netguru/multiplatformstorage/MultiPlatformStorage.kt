@@ -17,31 +17,31 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     }
 
     actual fun getString(key: String, defaultValue: String?): String? {
-        return Keychain.passwordForService(serviceName, account=key)
+        return Keychain.passwordForService(serviceName, key)
     }
 
     actual fun putString(key: String, value: String) {
-        Keychain.setPassword(value, serviceName, account= key)
+        Keychain.setPassword(value, serviceName, key)
     }
 
     actual fun getInt(key: String, defaultValue: Int): Int {
-        return Keychain.passwordForService(serviceName=serviceName, account=key)?.toInt() ?: defaultValue
+        return Keychain.passwordForService(serviceName, key)?.toInt() ?: defaultValue
     }
 
     actual fun putInt(key: String, value: Int) {
-        Keychain.setPassword(value.toString(), serviceName, account= key)
+        Keychain.setPassword(value.toString(), serviceName, key)
     }
 
     actual fun getLong(key: String, defaultValue: Long): Long {
-        return Keychain.passwordForService(serviceName=serviceName, account=key)?.toLong() ?: defaultValue
+        return Keychain.passwordForService(serviceName, key)?.toLong() ?: defaultValue
     }
 
     actual fun putLong(key: String, value: Long) {
-        Keychain.setPassword(value.toString(),serviceName, account= key)
+        Keychain.setPassword(value.toString(), serviceName, key)
     }
 
     actual fun getFloat(key: String, defaultValue: Float): Float {
-        return Keychain.passwordForService(serviceName=serviceName, account=key)?.toFloat() ?: defaultValue
+        return Keychain.passwordForService(serviceName, key)?.toFloat() ?: defaultValue
     }
 
     actual fun putFloat(key: String, value: Float) {
@@ -49,7 +49,7 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     }
 
     actual fun getDouble(key: String, defaultValue: Double): Double {
-        return Keychain.passwordForService(serviceName=serviceName, account=key)?.toDouble() ?: defaultValue
+        return Keychain.passwordForService(serviceName, key)?.toDouble() ?: defaultValue
     }
 
     actual fun putDouble(key: String, value: Double) {
@@ -57,7 +57,7 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     }
 
     actual fun getBoolean(key: String, defaultValue: Boolean): Boolean {
-        return Keychain.passwordForService(serviceName=serviceName, account=key)?.toBoolean() ?: defaultValue
+        return Keychain.passwordForService(serviceName, key)?.toBoolean() ?: defaultValue
     }
 
     actual fun putBoolean(key: String, value: Boolean) {
