@@ -12,6 +12,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-native-gradle-plugin:$kotlin_version"
         classpath "com.android.tools.build:gradle:3.2.1"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.2-SNAPSHOT'
     }
 }
 
@@ -20,13 +21,13 @@ allprojects {
         mavenLocal()
         google()
         jcenter()
+        maven { url "https://dl.bintray.com/netguru/maven" }
     }
+
+    apply from: rootProject.file("publish-bintray.gradle")
 
     group 'com.netguru.kotlinmultiplatformstorage'
     version libraryVersion
-
-    apply plugin: 'maven'
-    apply plugin: 'maven-publish'
 
     tasks.withType(Test) {
         testLogging {
