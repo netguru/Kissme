@@ -10,14 +10,21 @@ import keychainwrapper
 class MainViewController: UIViewController, MainView {
     
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var tableView: UITableView!
     
-    var presenter: MainPresenter {
-        return MainPresenter()
-    }
+    private var toDoList = [String]()
     
+    private lazy var presenter: MainPresenter = {
+        MainPresenter()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
         presenter.attachView(view: self)
     }
     
@@ -29,17 +36,35 @@ class MainViewController: UIViewController, MainView {
         presenter.addNewToDoElement(item: passwordText)
     }
     
-    @IBAction func showPasswordsButtonPressed(_ sender: Any) {
-        
-    }
-    
     func showElementAddedInfo() {
-//        let alertController = UIAlertController(title: "Success!", message: "Added password to keychain!", preferredStyle: .alert)
-//        self.present(alertController, animated: true, completion: nil)
+        let alertController = UIAlertController(title: "Success!", message: "Added password to keychain!", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Ok", style: .default)
+        alertController.addAction(alertAction)
+        passwordTextField.text = ""
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func showToDoList(toDoList: [String]) {
-//        print("showToDoListCalled")
+        self.toDoList = toDoList
+        tableView.reloadData()
+    }
+    
+}
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return toDoList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else { return UITableViewCell() }
+        cell.textLabel?.text = toDoList[indexPath.row]
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
 }

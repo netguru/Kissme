@@ -2,9 +2,6 @@
 //  AppDelegate.swift
 //  iOSApp
 //
-//  Created by Sebastian on 21/11/2018.
-//  Copyright © 2018 Sebastian. All rights reserved.
-//
 
 import UIKit
 
