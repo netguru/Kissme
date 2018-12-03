@@ -12,6 +12,8 @@ class MainPresenter {
     }
 
     fun attachView(view: MainView) {
+        print("view=")
+        print(view)
         this.view = view
         getToDoList()
     }
@@ -21,15 +23,13 @@ class MainPresenter {
     }
 
     fun addNewToDoElement(item: String) {
-        print(item)
-        storage.putInt(KEY_LIST, 12)
-        storage.putFloat(KEY_LIST, 13.toFloat())
-        storage.putLong(KEY_LIST, 13.0.toLong())
-        storage.putBoolean(KEY_LIST, true)
-
         toDoList.add(item)
-        storage.putString(KEY_LIST, toDoList.joinToString(separator = STRING_LIST_SEPARATOR))
+        storage.putString(KEY_LIST, "toDoList.joinToString(separator = STRING_LIST_SEPARATOR)")
         storage.getAll()
+
+        print("view2=")
+        print(view)
+
 //        with(view!!) {
 //            showElementAddedInfo()
 //            showToDoList(toDoList)

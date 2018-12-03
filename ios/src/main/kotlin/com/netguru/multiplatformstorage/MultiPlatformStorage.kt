@@ -19,7 +19,7 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     }
 
     actual fun putString(key: String, value: String) {
-        Keychain.setPassword(value.toString(),"defaultservice" , account= key)
+        Keychain.setPassword(value, "defaultservice", account= key)
     }
 
     actual fun getInt(key: String, defaultValue: Int): Int {
