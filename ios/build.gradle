@@ -23,3 +23,14 @@ components.main {
 dependencies {
     expectedBy project(':common')
 }
+
+task generateCinteropConfig(type :Exec){
+    workingDir "${projectDir}"
+    commandLine 'sh', "${projectDir}/generate_cinterop_conf.sh"
+}
+
+gradle.taskGraph.beforeTask { Task task ->
+    if (task.project.name == "ios") {
+        tasks.generateCinteropConfig.execute()
+    }
+}

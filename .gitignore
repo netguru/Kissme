@@ -93,3 +93,6 @@ fabric.properties
 *.DS_Store
 .AppleDouble
 .LSOverride
+
+# ios cinterop .def file
+/ios/src/main/c_interop/keychainwrapper.def
