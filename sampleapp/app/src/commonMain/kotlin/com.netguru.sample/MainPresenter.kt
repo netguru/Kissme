@@ -29,7 +29,7 @@ class MainPresenter {
 
         with(view!!) {
             showElementAddedInfo()
-            showToDoList(toDoList)
+            getToDoList()
         }
     }
 
@@ -40,6 +40,8 @@ class MainPresenter {
             val elements = storage.getString(KEY_LIST, "")!!.split(STRING_LIST_SEPARATOR)
             println("fetched ${elements.size} data records")
             toDoList.addAll(elements)
+        } else {
+            println ("storage doesn't contain KEY_LIST")
         }
         println("calling view!!.showToDoList(toDoList). view == null = ${view == null}")
         view!!.showToDoList(toDoList)
