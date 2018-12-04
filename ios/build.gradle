@@ -12,7 +12,7 @@ components.main {
         cinterop("keychainwrapper"){
             packageName "com.netguru.keychainWrapper"
             includeDirs {
-                allHeaders "./KeychainWrapper.framework/Headers"
+                allHeaders "./library/keychainwrapper/bin"
             }
             linkerOpts "-F${projectDir}"
             compilerOpts "-F${projectDir}"

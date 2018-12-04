@@ -24,6 +24,7 @@
 bin/
 gen/
 out/
+!/ios/library/keychainwrapper/bin
 
 # Gradle files
 .gradle/
