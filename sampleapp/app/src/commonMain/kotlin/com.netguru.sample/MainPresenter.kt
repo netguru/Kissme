@@ -12,13 +12,11 @@ class MainPresenter {
     }
 
     fun attachView(view: MainView) {
-        println("attachView")
         this.view = view
         getToDoList()
     }
 
     fun detachView() {
-        println("dettachView")
         this.view = null
     }
 
@@ -29,21 +27,14 @@ class MainPresenter {
 
         with(view!!) {
             showElementAddedInfo()
-            getToDoList()
+            showToDoList(toDoList)
         }
     }
 
     private fun getToDoList() {
-        println("getToDoList")
-
         if (storage.contains(KEY_LIST)) {
-            val elements = storage.getString(KEY_LIST, "")!!.split(STRING_LIST_SEPARATOR)
-            println("fetched ${elements.size} data records")
-            toDoList.addAll(elements)
-        } else {
-            println ("storage doesn't contain KEY_LIST")
+            toDoList.addAll(storage.getString(KEY_LIST, "")!!.split(STRING_LIST_SEPARATOR))
         }
-        println("calling view!!.showToDoList(toDoList). view == null = ${view == null}")
         view!!.showToDoList(toDoList)
     }
 
