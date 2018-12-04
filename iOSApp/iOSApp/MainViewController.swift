@@ -7,7 +7,7 @@ import UIKit
 import app
 import keychainwrapper
 
-class MainViewController: UIViewController, MainView {
+final class MainViewController: UIViewController, MainView {
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -28,7 +28,7 @@ class MainViewController: UIViewController, MainView {
         presenter.attachView(view: self)
     }
     
-    @IBAction func saveButtonPressed(_ sender: Any) {
+    @IBAction private func saveButtonPressed(_ sender: Any) {
         guard let passwordText = passwordTextField.text, !passwordText.isEmpty else {
             return
         }
