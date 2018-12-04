@@ -1,5 +1,6 @@
+
 # KotlinMultiplatformStorage
-KotlinMultiPlatformStorage is an open-source Kotlin MultiPlatform key-value storage library. It allows you to store key-value data in common module without any additional boilerplate code.
+KotlinMultiplatformStorage is an open-source Kotlin MultiPlatform key-value storage library. It allows you to store key-value data in common module without any additional boilerplate code.
 
 Currently library supports following platforms:
 - android
@@ -60,7 +61,7 @@ If you want to store something, just call:
 storage.putString(key = "someKey", value = "value")
 ```
 
-If you want to get stored value - use
+If you want to get stored value - use:
 ```kotlin
 storage.getString(key = "someKey", defaultValue = "default")
 ```
@@ -91,7 +92,7 @@ storage.clear()
 `KotlinMultiPlatformStorage` allows to store key-value pairs in platform-specific way.
 
 ### Android
-Android implementation uses `SharedPreferences` interface. Library allows you too choose between storing
+Android implementation uses `SharedPreferences` interface. Library allows you to choose between storing
 values in named or default preferences provided by `PreferenceManager`.
 
 `SharedPreference` instance is initialized lazily when calling one of the available functions
