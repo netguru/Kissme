@@ -12,11 +12,13 @@ class MainPresenter {
     }
 
     fun attachView(view: MainView) {
+        println("attachView")
         this.view = view
         getToDoList()
     }
 
     fun detachView() {
+        println("dettachView")
         this.view = null
     }
 
@@ -32,9 +34,14 @@ class MainPresenter {
     }
 
     private fun getToDoList() {
+        println("getToDoList")
+
         if (storage.contains(KEY_LIST)) {
-            toDoList.addAll(storage.getString(KEY_LIST, "")!!.split(STRING_LIST_SEPARATOR))
+            val elements = storage.getString(KEY_LIST, "")!!.split(STRING_LIST_SEPARATOR)
+            println("fetched ${elements.size} data records")
+            toDoList.addAll(elements)
         }
+        println("calling view!!.showToDoList(toDoList). view == null = ${view == null}")
         view!!.showToDoList(toDoList)
     }
 
