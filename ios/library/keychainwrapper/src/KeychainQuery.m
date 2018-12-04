@@ -135,7 +135,7 @@
         return NO;
     }
     
-    return result == nil;
+    return result != nil;
 }
 
 - (BOOL)clear {
