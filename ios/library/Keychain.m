@@ -42,7 +42,7 @@ NSString *const kKeychainWhereKey = @"svce";
     return [query save];
 }
 
-+ (nullable NSDictionary *)getAllPasswordForService:(NSString *)serviceName {
++ (NSDictionary *)getAllPasswordForService:(NSString *)serviceName {
     KeychainQuery *query = [[KeychainQuery alloc] init];
     query.service = serviceName;
     
