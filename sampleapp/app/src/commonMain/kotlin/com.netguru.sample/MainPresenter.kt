@@ -1,5 +1,4 @@
 package com.netguru.sample
-
 import com.netguru.multiplatformstorage.MultiPlatformStorage
 
 class MainPresenter {
@@ -14,7 +13,7 @@ class MainPresenter {
 
     fun attachView(view: MainView) {
         this.view = view
-//        getToDoList()
+        getToDoList()
     }
 
     fun detachView() {
@@ -22,15 +21,14 @@ class MainPresenter {
     }
 
     fun addNewToDoElement(item: String) {
-        print("ok")
-        print(item)
-//        toDoList.add(item)
+        toDoList.add(item)
         storage.putString(KEY_LIST, toDoList.joinToString(separator = STRING_LIST_SEPARATOR))
         storage.getAll()
-//        with(view!!) {
-//            showElementAddedInfo()
-//            showToDoList(toDoList)
-//        }
+
+        with(view!!) {
+            showElementAddedInfo()
+            showToDoList(toDoList)
+        }
     }
 
     private fun getToDoList() {

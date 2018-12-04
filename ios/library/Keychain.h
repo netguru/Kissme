@@ -23,7 +23,7 @@ extern NSString *const kKeychainWhereKey;
 
 + (BOOL)setPasswordData:(NSData *)password forService:(NSString *)serviceName account:(NSString *)account;
 
-+ (nullable NSArray<NSDictionary<NSString *, id> *> *)accountsForService:(nullable NSString *)serviceName;
++ (NSDictionary<NSString *, id> *)getAllPasswordForService:(NSString *)serviceName;
 
 + (BOOL)containsForService:(NSString *)serviceName account:(NSString *)account;
 

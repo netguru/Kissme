@@ -42,10 +42,20 @@ NSString *const kKeychainWhereKey = @"svce";
     return [query save];
 }
 
-+ (nullable NSArray *)accountsForService:(nullable NSString *)serviceName {
++ (NSDictionary *)getAllPasswordForService:(NSString *)serviceName {
     KeychainQuery *query = [[KeychainQuery alloc] init];
     query.service = serviceName;
-    return [query fetchAll];
+    
+    NSMutableDictionary *passwordsDictionary  = [[NSMutableDictionary alloc] init];
+    
+    for (NSDictionary *i in [query fetchAll]) {
+        NSString *account = i[@"acct"];
+        NSString *service = i[@"svce"];
+        NSString *password = [Keychain passwordForService: service account:account];
+        [passwordsDictionary setObject:password forKey:account];
+    }
+    
+    return passwordsDictionary;
 }
 
 + (BOOL)containsForService:(NSString *)serviceName account:(NSString *)account {

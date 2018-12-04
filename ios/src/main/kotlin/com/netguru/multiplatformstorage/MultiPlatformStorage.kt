@@ -1,78 +1,78 @@
 package com.netguru.multiplatformstorage
 import com.netguru.keychainWrapper.*
+import platform.Foundation.*
 
 actual class MultiPlatformStorage actual constructor(name: String?) {
 
+    private val serviceName: String = name ?: "defaultservice"
+
     actual fun getAll(): Map<String, *> {
-        val ok = Keychain.accountsForService(serviceName="ok12")
-        print(ok)
-        return mapOf<String, String>()
+        val allPasswords = Keychain.getAllPasswordForService(serviceName) ?: emptyMap<String, String>()
+        return allPasswords
+            .filter { it.key is String }
+            .map {
+                it.key as String to it.value
+            }
+            .toMap()
     }
 
     actual fun getString(key: String, defaultValue: String?): String? {
-        return ""
+        return Keychain.passwordForService(serviceName, key)
     }
 
     actual fun putString(key: String, value: String) {
-        Keychain.setPassword(password="ok", forService= "ok12", account= "ok123")
-
-//        Keychain.setPassword(password = "ok", forService= "ok12", account= "ok123")
-//        val accounts = Keychain.accountsForService(serviceName= "ok12")
-//        print(accounts)
+        Keychain.setPassword(value, serviceName, key)
     }
 
     actual fun getInt(key: String, defaultValue: Int): Int {
-        return 0
+        return Keychain.passwordForService(serviceName, key)?.toInt() ?: defaultValue
     }
 
     actual fun putInt(key: String, value: Int) {
-        print("ok2")
+        Keychain.setPassword(value.toString(), serviceName, key)
     }
 
     actual fun getLong(key: String, defaultValue: Long): Long {
-        return 0
+        return Keychain.passwordForService(serviceName, key)?.toLong() ?: defaultValue
     }
 
     actual fun putLong(key: String, value: Long) {
-        print("ok3")
+        Keychain.setPassword(value.toString(), serviceName, key)
     }
 
     actual fun getFloat(key: String, defaultValue: Float): Float {
-        return 1.5.toFloat()
+        return Keychain.passwordForService(serviceName, key)?.toFloat() ?: defaultValue
     }
 
     actual fun putFloat(key: String, value: Float) {
-        print("ok4")
+        Keychain.setPassword(value.toString(), serviceName, key)
     }
 
     actual fun getDouble(key: String, defaultValue: Double): Double {
-        return 0.0
+        return Keychain.passwordForService(serviceName, key)?.toDouble() ?: defaultValue
     }
 
     actual fun putDouble(key: String, value: Double) {
-        print("ok5")
+        Keychain.setPassword(value.toString(), serviceName, key)
     }
 
     actual fun getBoolean(key: String, defaultValue: Boolean): Boolean {
-        return false
+        return Keychain.passwordForService(serviceName, key)?.toBoolean() ?: defaultValue
     }
 
     actual fun putBoolean(key: String, value: Boolean) {
-        print("ok6")
-
+        Keychain.setPassword(value.toString(), serviceName, key)
     }
 
     actual fun contains(key: String): Boolean {
-        return true
+        return Keychain.containsForService(serviceName, key)
     }
 
     actual fun remove(key: String) {
-        print("ok7")
-
+        Keychain.deletePasswordForService(serviceName, key)
     }
 
     actual fun clear() {
-        print("ok8")
-
+        Keychain.clear()
     }
 }

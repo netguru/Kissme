@@ -1,11 +1,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Keychain.h"
-#import "KeychainQuery.h"
-
-typedef NS_ENUM(OSStatus, SAMKeychainErrorCode) {
-	KeychainErrorBadArguments = -1001,
-};
 
 extern NSString *const kKeychainErrorDomain;
 extern NSString *const kKeychainAccountKey;
@@ -28,8 +23,10 @@ extern NSString *const kKeychainWhereKey;
 
 + (BOOL)setPasswordData:(NSData *)password forService:(NSString *)serviceName account:(NSString *)account;
 
-+ (nullable NSArray<NSDictionary<NSString *, id> *> *)accountsForService:(nullable NSString *)serviceName;
++ (nullable NSDictionary<NSString *, id> *)getAllPasswordForService:(nullable NSString *)serviceName;
 
-+ (BOOL)clearKeychainForService:(NSString *)serviceName account:(NSString *)account;
++ (BOOL)containsForService:(NSString *)serviceName account:(NSString *)account;
+
++ (BOOL)clear;
 
 @end
