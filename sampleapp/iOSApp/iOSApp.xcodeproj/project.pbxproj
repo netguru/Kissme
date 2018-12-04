@@ -128,7 +128,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9EE04B8721A5D9DB00FB164D /* Build configuration list for PBXProject "iOSApp" */;
+			buildConfigurationList = 9EE04B8721A5D9DB00FB164D /* Build configuration list for PBXProject "iosApp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -175,7 +175,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"${PROJECT_DIR}/../sampleapp\"\n./gradlew :app:clean\n./gradlew :app:build\n./gradlew :app:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\ncd \"${PROJECT_DIR}/../sampleapp/app/build/xcode-frameworks\"\n";
+			shellScript = "cd \"${PROJECT_DIR}/..\"\n./gradlew :app:clean\n./gradlew :app:build\n./gradlew :app:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\ncd \"${PROJECT_DIR}/../app/build/xcode-frameworks\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -384,7 +384,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9EE04B8721A5D9DB00FB164D /* Build configuration list for PBXProject "iOSApp" */ = {
+		9EE04B8721A5D9DB00FB164D /* Build configuration list for PBXProject "iosApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9EE04B9C21A5D9DD00FB164D /* Debug */,
