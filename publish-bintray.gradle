@@ -18,7 +18,7 @@ bintray {
     override = true // for multi-platform Kotlin/Native publishing
     pkg {
         repo = 'maven'
-        name = 'kotlinmultiplatformstorage'
+        name = 'KotlinMultiplatformStorage'
         publish = true
         version {
             name = project.version
