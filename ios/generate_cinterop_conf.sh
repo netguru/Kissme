@@ -11,8 +11,8 @@ mkdir -p $target_file_dir
 echo \
 "language = Objective-C
 headers = Keychain.h KeychainQuery.h
-compilerOpts = -F$current_dir
-linkerOpts = -F$current_dir/library
+compilerOpts = -F$current_dir/library/keychainwrapper/bin
+linkerOpts = -F$current_dir/library/keychainwrapper/bin
 staticLibraries = keychainwrapper.a
-libraryPaths = $current_dir/library" \
+libraryPaths = $current_dir/library/keychainwrapper/bin" \
 >> "$target_file_dir$target_file_name"
