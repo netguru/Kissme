@@ -1,6 +1,6 @@
 
 # KotlinMultiplatformStorage
-KotlinMultiplatformStorage is an open-source Kotlin MultiPlatform key-value storage library. It allows you to store key-value data in common module without any additional boilerplate code.
+KotlinMultiplatformStorage is an open-source Kotlin Multiplatform key-value storage library. It allows you to store key-value data in common module without any additional boilerplate code.
 
 Currently library supports following platforms:
 - android
