@@ -9,13 +9,13 @@ import org.junit.Test
 
 class StorageTest {
 
-    private val storage = MultiPlatformStorage()
+    private val storage = MultiplatformStorage()
     private val editor = mockk<SharedPreferences.Editor>(relaxUnitFun = true)
     private val preferences = mockk<SharedPreferences> { every { edit() } returns editor }
 
     init {
-        mockkObject(SharedPreferencesProvider)
-        every { SharedPreferencesProvider.preferences() } returns preferences
+        mockkObject(AndroidStorageProvider)
+        every { AndroidStorageProvider.preferences() } returns preferences
     }
 
     @Test

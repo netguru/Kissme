@@ -6,13 +6,13 @@ import android.database.Cursor
 import android.net.Uri
 
 /**
- * [ContentProvider] which provides Application [android.content.Context] for [SharedPreferencesProvider].
+ * [ContentProvider] which provides Application [android.content.Context] for [AndroidStorageProvider].
  * Context will be provided automatically when Application starts.
  */
-internal class SharedPreferencesInitializer : ContentProvider() {
+internal class StorageInitializer : ContentProvider() {
 
     override fun onCreate(): Boolean {
-        SharedPreferencesProvider.appContext = context!!.applicationContext
+        AndroidStorageProvider.appContext = context!!.applicationContext
         return false
     }
 

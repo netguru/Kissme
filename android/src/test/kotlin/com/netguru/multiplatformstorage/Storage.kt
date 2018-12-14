@@ -3,8 +3,8 @@ package com.netguru.multiplatformstorage
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 
-actual val storage: MultiPlatformStorage
+actual val storage: MultiplatformStorage
     get() {
-        SharedPreferencesProvider.appContext = ApplicationProvider.getApplicationContext<Context>()
-        return MultiPlatformStorage()
+        AndroidStorageProvider.appContext = ApplicationProvider.getApplicationContext<Context>()
+        return MultiplatformStorage()
     }

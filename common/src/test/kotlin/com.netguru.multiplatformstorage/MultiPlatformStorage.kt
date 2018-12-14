@@ -3,7 +3,7 @@ package com.netguru.multiplatformstorage
 import kotlin.test.Test
 import kotlin.test.*
 
-expect val storage: MultiPlatformStorage
+expect val storage: MultiplatformStorage
 
 class MultiPlatformStorageTest : BaseTest() {
 

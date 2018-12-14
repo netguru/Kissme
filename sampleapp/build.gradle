@@ -17,6 +17,7 @@ buildscript {
 allprojects {
     repositories {
         mavenLocal()
+        maven { url "https://dl.bintray.com/netguru/maven" }
         google()
         jcenter()
         mavenCentral()
