@@ -1,3 +1,3 @@
 package com.netguru.multiplatformstorage
 
-actual val storage: MultiPlatformStorage = MultiPlatformStorage()
+actual val storage: MultiplatformStorage = MultiplatformStorage()
