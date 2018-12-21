@@ -1,17 +1,18 @@
 package com.netguru.multiplatformstorage
 
-import android.content.SharedPreferences
+import com.ironz.binaryprefs.Preferences
+import com.ironz.binaryprefs.PreferencesEditor
 
 /**
  * Actual key-value data storage Android implementation.
  * It uses [SharedPreferences] under the hood.
- * [SharedPreferences] are initialized automatically by using [SharedPreferencesProvider].
+ * [SharedPreferences] are initialized automatically by using [AndroidStorageProvider].
  * When [name] parameter is specified it will be used to retrieve named shared prefs instance else default shared prefs will be used.
  */
-actual class MultiPlatformStorage actual constructor(name: String?) {
+actual class MultiplatformStorage actual constructor(name: String?) {
 
-    private val preferences: SharedPreferences by lazy {
-        SharedPreferencesProvider.preferences(name)
+    private val preferences: Preferences by lazy {
+        AndroidStorageProvider.preferences(name)
     }
 
     actual fun getAll(): Map<String, *> = preferences.all
@@ -48,7 +49,7 @@ actual class MultiPlatformStorage actual constructor(name: String?) {
     actual fun clear() = preferences.edit { clear() }
 }
 
-private inline fun SharedPreferences.edit(action: SharedPreferences.Editor.() -> Unit) = with(edit()) {
+private inline fun Preferences.edit(action: PreferencesEditor.() -> Unit) = with(edit()) {
     action()
     apply()
 }

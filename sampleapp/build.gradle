@@ -7,6 +7,7 @@ buildscript {
         maven { url "http://kotlin.bintray.com/kotlin-dev" }
         maven { url "https://kotlin.bintray.com/kotlinx" }
         maven { url 'https://dl.bintray.com/jetbrains/kotlin-native-dependencies' }
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
@@ -17,9 +18,11 @@ buildscript {
 allprojects {
     repositories {
         mavenLocal()
+        maven { url "https://dl.bintray.com/netguru/maven" }
         google()
         jcenter()
         mavenCentral()
+        maven { url "https://jitpack.io" }
     }
 }
 
