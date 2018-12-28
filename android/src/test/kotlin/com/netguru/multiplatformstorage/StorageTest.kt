@@ -1,6 +1,7 @@
 package com.netguru.multiplatformstorage
 
-import android.content.SharedPreferences
+import com.ironz.binaryprefs.Preferences
+import com.ironz.binaryprefs.PreferencesEditor
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkObject
@@ -9,13 +10,13 @@ import org.junit.Test
 
 class StorageTest {
 
-    private val storage = MultiPlatformStorage()
-    private val editor = mockk<SharedPreferences.Editor>(relaxUnitFun = true)
-    private val preferences = mockk<SharedPreferences> { every { edit() } returns editor }
+    private val storage = MultiplatformStorage()
+    private val editor = mockk<PreferencesEditor>(relaxUnitFun = true)
+    private val preferences = mockk<Preferences> { every { edit() } returns editor }
 
     init {
-        mockkObject(SharedPreferencesProvider)
-        every { SharedPreferencesProvider.preferences() } returns preferences
+        mockkObject(AndroidStorageProvider)
+        every { AndroidStorageProvider.preferences() } returns preferences
     }
 
     @Test

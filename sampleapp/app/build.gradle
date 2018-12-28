@@ -49,6 +49,7 @@ kotlin {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib'
                 implementation "com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-android:$libraryVersion"
+                implementation "com.github.yandextaxitech:binaryprefs:1.0.1" // TODO: This should be bundled inside kotlinmultiplatformstorage
             }
         }
 

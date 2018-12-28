@@ -22,6 +22,7 @@ allprojects {
         google()
         jcenter()
         maven { url "https://dl.bintray.com/netguru/maven" }
+        maven { url "https://jitpack.io" }
     }
 
     apply from: rootProject.file("publish-bintray.gradle")
