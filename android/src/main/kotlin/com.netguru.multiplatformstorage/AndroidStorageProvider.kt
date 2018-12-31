@@ -28,6 +28,7 @@ import javax.crypto.spec.GCMParameterSpec
 @SuppressLint("StaticFieldLeak")
 internal object AndroidStorageProvider {
 
+    private const val DEFAULT_PREFERENCES_NAME = "default"
     private const val TRANSFORMATION = "AES/GCM/NoPadding"
     private const val PREFERENCES_NAME = "keys_preferences"
     private const val KEYSTORE_VALUES_KEY_ALIAS = "keystore_values_key_alias"
@@ -58,29 +59,22 @@ internal object AndroidStorageProvider {
 
         val preferences = appContext.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
 
-        // Generating new keys
         if (!keysExist(keyStore, preferences)) {
-            clearKeys(keyStore, preferences)
-            generateKeystoreKey(KEYSTORE_VALUES_KEY_ALIAS, keyStore)
-            generateKeystoreKey(KEYSTORE_VALUES_IV_ALIAS, keyStore)
-            generateKeystoreKey(KEYSTORE_KEYS_KEY_ALIAS, keyStore)
-            preferences.edit {
-                putString(VALUES_KEY_ALIAS, generateEncryptedKey(keyStore.getSecretKey(KEYSTORE_VALUES_KEY_ALIAS)))
-                putString(VALUES_IV_ALIAS, generateEncryptedKey(keyStore.getSecretKey(KEYSTORE_VALUES_IV_ALIAS)))
-                putString(KEYS_KEY_ALIAS, generateEncryptedKey(keyStore.getSecretKey(KEYSTORE_KEYS_KEY_ALIAS)))
-            }
+            generateNewKeys(keyStore, preferences)
         }
 
-        val valuesKey = getDecryptedKey(VALUES_KEY_ALIAS, KEYSTORE_VALUES_KEY_ALIAS, preferences, keyStore)
-        val valuesIv = getDecryptedKey(VALUES_IV_ALIAS, KEYSTORE_VALUES_IV_ALIAS, preferences, keyStore)
-        val keysKey = getDecryptedKey(KEYS_KEY_ALIAS, KEYSTORE_KEYS_KEY_ALIAS, preferences, keyStore)
-
+        val valuesKey =
+            decrypt(decryptString(VALUES_KEY_ALIAS, preferences), keyStore.getSecretKey(KEYSTORE_VALUES_KEY_ALIAS))
+        val valuesIv =
+            decrypt(decryptString(VALUES_IV_ALIAS, preferences), keyStore.getSecretKey(KEYSTORE_VALUES_IV_ALIAS))
+        val keysKey =
+            decrypt(decryptString(KEYS_KEY_ALIAS, preferences), keyStore.getSecretKey(KEYSTORE_KEYS_KEY_ALIAS))
 
         return BinaryPreferencesBuilder(appContext)
             .migrateFrom(getSharedPreferences(name))
             .keyEncryption(XorKeyEncryption(keysKey))
             .valueEncryption(AesValueEncryption(valuesKey, valuesIv))
-            .name(name ?: "default")
+            .name(name ?: DEFAULT_PREFERENCES_NAME)
             .build()
     }
 
@@ -114,11 +108,31 @@ internal object AndroidStorageProvider {
         }
     }
 
-    private fun generateEncryptedKey(key: Key) =
-        Base64.encodeToString(encryptKey(generateRandomKey(), key), Base64.DEFAULT)
+    private fun generateNewKeys(keyStore: KeyStore, preferences: SharedPreferences) {
+        clearKeys(keyStore, preferences)
+        generateKeystoreKey(KEYSTORE_VALUES_KEY_ALIAS, keyStore)
+        generateKeystoreKey(KEYSTORE_VALUES_IV_ALIAS, keyStore)
+        generateKeystoreKey(KEYSTORE_KEYS_KEY_ALIAS, keyStore)
+        preferences.edit {
+            putString(
+                VALUES_KEY_ALIAS,
+                encodeToString(encryptKey(generateRandomKey(), keyStore.getSecretKey(KEYSTORE_VALUES_KEY_ALIAS)))
+            )
+            putString(
+                VALUES_IV_ALIAS,
+                encodeToString(encryptKey(generateRandomKey(), keyStore.getSecretKey(KEYSTORE_VALUES_IV_ALIAS)))
+            )
+            putString(
+                KEYS_KEY_ALIAS,
+                encodeToString(encryptKey(generateRandomKey(), keyStore.getSecretKey(KEYSTORE_KEYS_KEY_ALIAS)))
+            )
+        }
+    }
 
-    private fun getDecryptedKey(key: String, keystoreKey: String, preferences: SharedPreferences, keyStore: KeyStore) =
-        decryptKey(Base64.decode(preferences.getString(key, "")!!, Base64.DEFAULT), keyStore.getSecretKey(keystoreKey))
+    private fun encodeToString(byteArray: ByteArray) = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+    private fun decryptString(key: String, preferences: SharedPreferences) =
+        Base64.decode(preferences.getString(key, "")!!, Base64.DEFAULT)
 
     private fun generateRandomKey() = with(ByteArray(KEY_LENGTH)) {
         SecureRandom().nextBytes(this)
@@ -130,20 +144,21 @@ internal object AndroidStorageProvider {
         generateIvKeyVector(doFinal(data), iv)
     }
 
-    private fun decryptKey(encryptedData: ByteArray, key: Key) = with(Cipher.getInstance(TRANSFORMATION)) {
-        val (iv, encryptedKey) = with(ByteBuffer.wrap(encryptedData)) {
-            order(ByteOrder.BIG_ENDIAN)
-            val ivLength = int
-            val iv = ByteArray(ivLength)
-            val encryptedKey = ByteArray(encryptedData.size - Integer.SIZE - ivLength)
-            get(iv)
-            get(encryptedKey)
-            iv to encryptedKey
-        }
-
+    private fun decrypt(encryptedData: ByteArray, key: Key) = with(Cipher.getInstance(TRANSFORMATION)) {
+        val (iv, encryptedKey) = extractIvAndEncryptedKey(encryptedData)
         val ivSpec = GCMParameterSpec(GCM_INITIAL_LENGTH, iv)
         init(Cipher.DECRYPT_MODE, key, ivSpec)
         doFinal(encryptedKey)
+    }
+
+    private fun extractIvAndEncryptedKey(encryptedData: ByteArray) = with(ByteBuffer.wrap(encryptedData)) {
+        order(ByteOrder.BIG_ENDIAN)
+        val ivLength = int
+        val iv = ByteArray(ivLength)
+        val encryptedKey = ByteArray(encryptedData.size - Integer.SIZE - ivLength)
+        get(iv)
+        get(encryptedKey)
+        iv to encryptedKey
     }
 
     private fun generateIvKeyVector(encryptedKey: ByteArray, iv: ByteArray): ByteArray {
