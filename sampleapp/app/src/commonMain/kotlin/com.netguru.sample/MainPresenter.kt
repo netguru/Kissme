@@ -23,7 +23,6 @@ class MainPresenter {
     fun addNewToDoElement(item: String) {
         toDoList.add(item)
         storage.putString(KEY_LIST, toDoList.joinToString(separator = STRING_LIST_SEPARATOR))
-        storage.getAll()
 
         with(view!!) {
             showElementAddedInfo()
