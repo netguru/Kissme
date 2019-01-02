@@ -1,6 +1,6 @@
 
 # KotlinMultiplatformStorage
-KotlinMultiplatformStorage is an open-source Kotlin Multiplatform key-value storage library. It allows you to store key-value data in common module without any additional boilerplate code.
+KotlinMultiplatformStorage is an open-source Kotlin Multiplatform encrypted, key-value storage library. It allows you to store key-value data in common code module without any additional boilerplate code.
 
 Currently library supports following platforms:
 - android
@@ -92,16 +92,14 @@ storage.clear()
 `KotlinMultiPlatformStorage` allows to store key-value pairs in platform-specific way.
 
 ### Android
-Android implementation uses `SharedPreferences` interface. Library allows you to choose between storing
-values in named or default preferences provided by `PreferenceManager`.
+Android implementation uses [binaryprefs](https://github.com/yandextaxitech/binaryprefs) library under the hood in order to provide a robust key-value storage mechanism. 
+The keys and values are encrypted using XOR and AES encryption accordingly. The data encryption and encryption keys storing generating mechanisms are fully automated and is applied to the stored data by default. All the encryption keys are stored in the Android `KeyStore`.  
 
-`SharedPreference` instance is initialized lazily when calling one of the available functions
-using application `Context` which is provided automatically by `ContentProvider`.
+In order to acquire the application `Context` instance required for data storing operations the library registers an internal 
+ `ContentProvider`.
 
 ### iOS
-
-As we all know `UserDefaults` isn't best place to store app secrets, that's why iOS implementation is using native iOS Keychain. Security Enclave is a hardware-based key manager that's isolated from processor. It allows you to store, delete, fetch passwords and accounts. 
-
+The iOS implementation is using native iOS `Keychain`. The Secure Enclave is a hardware-based key manager that's isolated from processor. It allows you to store, delete, fetch passwords and accounts. 
 `Keychain` is simple wrapper build upon `Security` interface to store, save, and fetch not only passwords, but also accounts.
 
 ## Running sample app
