@@ -1,10 +1,11 @@
 package com.netguru.multiplatformstorage
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.util.Base64
+import com.ironz.binaryprefs.BinaryPreferencesBuilder
+import com.ironz.binaryprefs.Preferences
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.security.Key
@@ -16,7 +17,7 @@ import javax.crypto.spec.GCMParameterSpec
 
 /**
  * Simple keys storage.
- * All keys are encrypted using [KeyStore] and stored in [SharedPreferences].
+ * All keys are encrypted using [KeyStore] and stored in [Preferences].
  * Keys are generated automatically.
  */
 internal class EncryptionKeysStorage {
@@ -28,7 +29,9 @@ internal class EncryptionKeysStorage {
         val keyStore = KeyStore.getInstance(KEYSTORE_NAME)
         keyStore.load(null)
 
-        val preferences = appContext.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+        val preferences = BinaryPreferencesBuilder(appContext)
+            .name(PREFERENCES_NAME)
+            .build()
 
         if (!keysExist(keyStore, preferences)) {
             generateNewKeys(keyStore, preferences)
@@ -39,14 +42,14 @@ internal class EncryptionKeysStorage {
         }
     }
 
-    private fun clearKeys(keyStore: KeyStore, sharedPreferences: SharedPreferences) = EncryptionKey.values().forEach {
+    private fun clearKeys(keyStore: KeyStore, preferences: Preferences) = EncryptionKey.values().forEach {
         keyStore.deleteEntry(it.keystoreKeyAlias)
-        sharedPreferences.edit {
+        preferences.edit {
             remove(it.keyAlias)
         }
     }
 
-    private fun keysExist(keyStore: KeyStore, preferences: SharedPreferences) =
+    private fun keysExist(keyStore: KeyStore, preferences: Preferences) =
         EncryptionKey.values().fold(true) { status, key ->
             status && keyStore.containsAlias(key.keystoreKeyAlias) && preferences.contains(key.keyAlias)
         }
@@ -63,7 +66,7 @@ internal class EncryptionKeysStorage {
         }
     }
 
-    private fun generateNewKeys(keyStore: KeyStore, preferences: SharedPreferences) {
+    private fun generateNewKeys(keyStore: KeyStore, preferences: Preferences) {
         clearKeys(keyStore, preferences)
         EncryptionKey.values().forEach {
             generateKeystoreKey(it.keystoreKeyAlias, keyStore)
@@ -78,7 +81,7 @@ internal class EncryptionKeysStorage {
 
     private fun encodeToString(byteArray: ByteArray) = Base64.encodeToString(byteArray, Base64.DEFAULT)
 
-    private fun decryptString(key: String, preferences: SharedPreferences) =
+    private fun decryptString(key: String, preferences: Preferences) =
         Base64.decode(preferences.getString(key, "")!!, Base64.DEFAULT)
 
     private fun generateRandomKey() = with(ByteArray(KEY_LENGTH)) {
@@ -122,12 +125,6 @@ internal class EncryptionKeysStorage {
 
     private fun KeyStore.getSecretKey(alias: String) = (getEntry(alias, null) as KeyStore.SecretKeyEntry).secretKey
 
-    private inline fun SharedPreferences.edit(action: SharedPreferences.Editor.() -> Unit) {
-        val editor = edit()
-        editor.action()
-        editor.apply()
-    }
-
     companion object {
         private const val TRANSFORMATION = "AES/GCM/NoPadding"
         private const val PREFERENCES_NAME = "keys_preferences"
@@ -139,7 +136,7 @@ internal class EncryptionKeysStorage {
 
 /**
  * Keys stored in [EncryptionKeysStorage].
- * Contains aliases for [SharedPreferences] and [KeyStore].
+ * Contains aliases for [Preferences] and [KeyStore].
  */
 internal enum class EncryptionKey(internal val keyAlias: String, internal val keystoreKeyAlias: String) {
     VALUES_KEY(keyAlias = "values_key_alias", keystoreKeyAlias = "keystore_values_key_alias"),
