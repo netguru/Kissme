@@ -49,7 +49,7 @@ actual class MultiplatformStorage actual constructor(name: String?) {
     actual fun clear() = preferences.edit { clear() }
 }
 
-private inline fun Preferences.edit(action: PreferencesEditor.() -> Unit) = with(edit()) {
+internal inline fun Preferences.edit(action: PreferencesEditor.() -> Unit) = with(edit()) {
     action()
     apply()
 }
