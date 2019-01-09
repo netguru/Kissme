@@ -39,7 +39,7 @@ Then add following dependencies to the common module build.gradle:
     }
 ```
 
-Remecom.netguru.kissmeocom.netguru.kissmee `GRADLE_METADATA` in `settings.gradle`:
+Remember to enable `GRADLE_METADATA` in `settings.gradle`:
 ```groovy
 enableFeaturePreview('GRADLE_METADATA')
 ```
