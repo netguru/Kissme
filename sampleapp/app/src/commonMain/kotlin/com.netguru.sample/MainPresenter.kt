@@ -1,5 +1,5 @@
 package com.netguru.sample
-import com.netguru.multiplatformstorage.MultiplatformStorage
+import com.netguru.kissme.Kissme
 
 class MainPresenter {
 
@@ -8,7 +8,7 @@ class MainPresenter {
     private val toDoList = mutableListOf<String>()
 
     private val storage by lazy {
-        MultiplatformStorage()
+        Kissme()
     }
 
     fun attachView(view: MainView) {
