@@ -5,7 +5,7 @@ import kotlin.test.*
 
 expect val storage: Kissme
 
-class MultiplatformStorageTest : BaseTest() {
+class KissmeTest : BaseTest() {
 
     @Test
     fun `should get proper string value when storage contains key`() {
