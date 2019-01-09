@@ -1,4 +1,4 @@
-package com.netguru.multiplatformstorage
+package com.netguru.kissme
 
 import org.jetbrains.annotations.TestOnly
 

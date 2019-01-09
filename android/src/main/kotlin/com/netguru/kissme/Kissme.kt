@@ -1,4 +1,4 @@
-package com.netguru.multiplatformstorage
+package com.netguru.kissme
 
 import com.ironz.binaryprefs.Preferences
 import com.ironz.binaryprefs.PreferencesEditor
@@ -9,7 +9,7 @@ import com.ironz.binaryprefs.PreferencesEditor
  * [SharedPreferences] are initialized automatically by using [AndroidStorageProvider].
  * When [name] parameter is specified it will be used to retrieve named shared prefs instance else default shared prefs will be used.
  */
-actual class MultiplatformStorage actual constructor(name: String?) {
+actual class Kissme actual constructor(name: String?) {
 
     private val preferences: Preferences by lazy {
         AndroidStorageProvider.preferences(name)

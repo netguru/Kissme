@@ -23,24 +23,21 @@ Then add following dependencies to the common module build.gradle:
     sourceSets {
         commonMain {
             dependencies {
-                implementation 'com.netguru.kissme:kissme-common:0.1.0'
-            }
+                implementation com.netguru.kcom.netguru.kissme com.netguru.kissme     }
         }
         androidMain {
             dependencies {
-                implementation 'com.netguru.kissme:kissme-android:0.1.0'
+                implementation com.netguru.kissme
             }
-        }
-
-        iosMain {
+  com.netguru.kissme}com.netguru.kissme    iosMain {
             dependencies {
-                implementation 'com.netguru.kissme:kissme-ios:0.1.0'
+                implementation com.netguru.kissme
             }
         }
     }
 ```
 
-Remember to enable `GRADLE_METADATA` in `settings.gradle`:
+Remecom.netguru.kissmeocom.netguru.kissmee `GRADLE_METADATA` in `settings.gradle`:
 ```groovy
 enableFeaturePreview('GRADLE_METADATA')
 ```

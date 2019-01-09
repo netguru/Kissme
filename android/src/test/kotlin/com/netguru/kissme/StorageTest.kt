@@ -1,4 +1,4 @@
-package com.netguru.multiplatformstorage
+package com.netguru.kissme
 
 import com.ironz.binaryprefs.Preferences
 import com.ironz.binaryprefs.PreferencesEditor
@@ -10,7 +10,7 @@ import org.junit.Test
 
 class StorageTest {
 
-    private val storage = MultiplatformStorage()
+    private val storage = Kissme()
     private val editor = mockk<PreferencesEditor>(relaxUnitFun = true)
     private val preferences = mockk<Preferences> { every { edit() } returns editor }
 

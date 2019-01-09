@@ -1,8 +1,9 @@
-package com.netguru.multiplatformstorage
+package com.netguru.kissme
+
 import com.netguru.keychainWrapper.*
 import platform.Foundation.*
 
-actual class MultiplatformStorage actual constructor(name: String?) {
+actual class Kissme actual constructor(name: String?) {
 
     private val serviceName: String = name ?: "defaultservice"
 

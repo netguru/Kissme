@@ -1,4 +1,4 @@
-package com.netguru.multiplatformstorage
+package com.netguru.kissme
 
 import android.content.ContentProvider
 import android.content.ContentValues

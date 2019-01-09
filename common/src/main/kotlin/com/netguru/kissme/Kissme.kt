@@ -1,4 +1,4 @@
-package com.netguru.multiplatformstorage
+package com.netguru.kissme
 
 /**
  * Key-value data storage.
@@ -7,7 +7,7 @@ package com.netguru.multiplatformstorage
  * Storage mechanism is defined using a platform-specific implementation.
  * For more information check platform-specific module.
  */
-expect class MultiplatformStorage(name: String? = null) {
+expect class Kissme(name: String? = null) {
 
     /**
      * Retrieve all values from the storage.

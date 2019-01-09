@@ -1,4 +1,4 @@
-package com.netguru.multiplatformstorage
+package com.netguru.kissme
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.every

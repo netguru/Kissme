@@ -1,10 +1,10 @@
-package com.netguru.multiplatformstorage
+package com.netguru.kissme
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 
-actual val storage: MultiplatformStorage
+actual val storage: Kissme
     get() {
         AndroidStorageProvider.appContext = ApplicationProvider.getApplicationContext<Context>()
-        return MultiplatformStorage()
+        return Kissme()
     }
