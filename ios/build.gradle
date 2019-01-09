@@ -6,7 +6,7 @@ sourceSets.main {
 components.main {
     targets = ['ios_arm64', 'ios_x64']
     outputKinds = [KLIBRARY]
-    baseName = "kotlinmultiplatformstorage-ios"
+    baseName = "kissme-ios"
 
     dependencies {
         cinterop("keychainwrapper"){

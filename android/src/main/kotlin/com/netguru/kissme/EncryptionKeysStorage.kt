@@ -1,4 +1,4 @@
-package com.netguru.multiplatformstorage
+package com.netguru.kissme
 
 import android.content.Context
 import android.security.keystore.KeyGenParameterSpec

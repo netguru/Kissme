@@ -42,20 +42,20 @@ kotlin {
         commonMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
-                implementation "com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-common:$libraryVersion"
+                implementation "com.netguru.kissme:kissme-common:$libraryVersion"
             }
         }
         androidMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-                implementation "com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-android:$libraryVersion"
+                implementation "com.netguru.kissme:kissme-android:$libraryVersion"
                 implementation "com.github.yandextaxitech:binaryprefs:1.0.1" // TODO: This should be bundled inside kotlinmultiplatformstorage
             }
         }
 
         iosMain {
             dependencies {
-                implementation "com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-ios:$libraryVersion"
+                implementation "com.netguru.kissme:kissme-ios:$libraryVersion"
             }
         }
     }

@@ -15,7 +15,7 @@ publishing {
         android(MavenPublication) {
             artifact("$buildDir/outputs/aar/android-release.aar")
             artifact sourcesJar
-            artifactId 'kotlinmultiplatformstorage-android'
+            artifactId 'kissme-android'
         }
     }
 }

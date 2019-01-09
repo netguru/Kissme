@@ -4,6 +4,6 @@
                 android:authorities="${applicationId}.initprovider"
                 android:exported="false"
                 android:enabled="true"
-                android:name="com.netguru.multiplatformstorage.StorageInitializer"/>
+                android:name="com.netguru.kissme.StorageInitializer"/>
     </application>
 </manifest>

@@ -1,11 +1,11 @@
-package com.netguru.multiplatformstorage
+package com.netguru.kissme
 
 import kotlin.test.Test
 import kotlin.test.*
 
-expect val storage: MultiplatformStorage
+expect val storage: Kissme
 
-class MultiplatformStorageTest : BaseTest() {
+class KissmeTest : BaseTest() {
 
     @Test
     fun `should get proper string value when storage contains key`() {

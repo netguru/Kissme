@@ -27,7 +27,7 @@ allprojects {
 
     apply from: rootProject.file("publish-bintray.gradle")
 
-    group 'com.netguru.kotlinmultiplatformstorage'
+    group 'com.netguru.kissme'
     version libraryVersion
 
     tasks.withType(Test) {

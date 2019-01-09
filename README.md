@@ -1,11 +1,14 @@
 
-# KotlinMultiplatformStorage
-KotlinMultiplatformStorage is an open-source Kotlin Multiplatform encrypted, key-value storage library. It allows you to store key-value data in common code module without any additional boilerplate code.
+# Kissme: Kotlin Secure Storage Multiplatform
+**Kissme** is an open-source library providing encrypted key-value storage.
 
-Currently library supports following platforms:
-- android
-- ios_arm64
-- ios_x64
+It can be integrated seamlessly in Kotlin projects built with **Kotlin Multiplatform**, **Kotlin/Native**, and **Kotlin Android** plugins.
+
+**Kissme** allows storing key-value data in common code modules without any additional boilerplate code.
+
+Currently library supports the following platforms:
+- Android (API `>=` 23)
+- iOS (`ios_arm64` and `ios_x64` targets)
 
 ## Download
 To use this library in your project, add Netguru bintray url to the repositories block:
@@ -20,18 +23,17 @@ Then add following dependencies to the common module build.gradle:
     sourceSets {
         commonMain {
             dependencies {
-                implementation 'com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-common:0.1.0'
+                implementation 'com.netguru.kissme:kissme-common:0.1.0'     
             }
         }
         androidMain {
             dependencies {
-                implementation 'com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-android:0.1.0'
+                implementation 'com.netguru.kissme:kissme-android:0.1.0'
             }
         }
-
         iosMain {
             dependencies {
-                implementation 'com.netguru.kotlinmultiplatformstorage:kotlinmultiplatformstorage-ios:0.1.0'
+                implementation 'com.netguru.kissme:kissme-ios:0.1.0'
             }
         }
     }
@@ -42,13 +44,13 @@ Remember to enable `GRADLE_METADATA` in `settings.gradle`:
 enableFeaturePreview('GRADLE_METADATA')
 ```
 ## Usage
-Just instantiate `MultiPlatformStorage` in common module class and enjoy! It's as simple as that!
-You don't have to initialize it by yourself. You don't have to pass `Context`. Everything is done automatically.
+Just start with creating an instance of `Kissme` class somewhere in your common module and enjoy! It's as simple as that.
+You don't have to initialize it by yourself nor to pass Android `Context`. Everything is done automatically.
 ```kotlin
-val storage = MultiPlatformStorage(name = "some_storage")
+val storage = Kissme(name = "my_secret_storage")
 ```
-`name` parameter is optional, and you can omit it if you want to use default storage.
-`MultiPlatformStorage` allows you to store and persist multiple data types:
+The `name` parameter is optional. You can omit it if you want to use default storage.
+`Kissme` allows you to store and persist multiple data types:
 - String
 - Int
 - Long
@@ -68,12 +70,12 @@ storage.getString(key = "someKey", defaultValue = "default")
 
 All `get()` functions will return `defaultValue` parameter if storage doesn't contain selected `key`.
 
-You can get all keys stored in `MultiPlatformStorage` by calling:
+You can get all keys stored in `Kissme` storage by calling:
 ```kotlin
 storage.getAll()
 ```
 
-You can check if `MultiPlatformStorage` contains selected `key` by calling:
+You can check if `Kissme` storage contains selected `key` by calling:
 ```kotlin
 storage.contains(key = "someKey")
 ```
@@ -83,13 +85,13 @@ You can also remove selected key from storage:
 storage.remove(key = "someKey")
 ```
 
-Last, but not least, you can remove all data stored in `MultiPlatformStorage`:
+Last, but not least, you can remove all data stored in `Kissme` storage:
 ```kotlin
 storage.clear()
 ```
 
 ## About
-`KotlinMultiPlatformStorage` allows to store key-value pairs in platform-specific way.
+`Kissme` allows to store key-value pairs in platform-specific way securely.
 
 ### Android
 Android implementation uses [binaryprefs](https://github.com/yandextaxitech/binaryprefs) library under the hood in order to provide a robust key-value storage mechanism. 
@@ -103,7 +105,7 @@ The iOS implementation is using native iOS `Keychain`. The Secure Enclave is a h
 `Keychain` is simple wrapper build upon `Security` interface to store, save, and fetch not only passwords, but also accounts.
 
 ## Running sample app
-Sample app uses Maven Local for resolving `KotlinMultiPlatformStorage` dependencies. Before running sample app you need to:
+Sample app uses Maven Local for resolving `Kissme` dependencies. Before running sample app you need to:
 1. Build the library - `./gradlew build`
 2. Publish dependencies to Maven Local - `./gradlew publishToMavenLocal`
 3. Run selected library. If you want to run iOS app - you need to properly configure Xcode.
