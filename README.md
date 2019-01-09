@@ -44,7 +44,7 @@ Remecom.netguru.kissmeocom.netguru.kissmee `GRADLE_METADATA` in `settings.gradle
 enableFeaturePreview('GRADLE_METADATA')
 ```
 ## Usage
-Just start with creating an instance of `Kissme` class somewhere in your common module and enjoy! It's as simple as that 🙉 😁.
+Just start with creating an instance of `Kissme` class somewhere in your common module and enjoy! It's as simple as that.
 You don't have to initialize it by yourself nor to pass Android `Context`. Everything is done automatically.
 ```kotlin
 val storage = Kissme(name = "my_secret_storage")
