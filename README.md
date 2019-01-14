@@ -1,5 +1,8 @@
 
 # Kissme: Kotlin Secure Storage Multiplatform
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Kissme-brightgreen.svg?style=flat-square)](https://android-arsenal.com/details/1/7452)
+
 **Kissme** is an open-source library providing encrypted key-value storage.
 
 It can be integrated seamlessly in Kotlin projects built with **Kotlin Multiplatform**, **Kotlin/Native**, and **Kotlin Android** plugins.
