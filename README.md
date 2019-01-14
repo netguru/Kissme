@@ -23,17 +23,17 @@ Then add following dependencies to the common module build.gradle:
     sourceSets {
         commonMain {
             dependencies {
-                implementation 'com.netguru.kissme:kissme-common:0.2.0'     
+                implementation 'com.netguru.kissme:kissme-common:0.2.1'     
             }
         }
         androidMain {
             dependencies {
-                implementation 'com.netguru.kissme:kissme-android:0.2.0'
+                implementation 'com.netguru.kissme:kissme-android:0.2.1'
             }
         }
         iosMain {
             dependencies {
-                implementation 'com.netguru.kissme:kissme-ios:0.2.0'
+                implementation 'com.netguru.kissme:kissme-ios:0.2.1'
             }
         }
     }
