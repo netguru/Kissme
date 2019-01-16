@@ -20,7 +20,6 @@ publishing {
             //The publication doesn't know about our dependencies, so we have to manually add them to the pom
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
-                println configurations.compile.allDependencies
 
                 //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
                 configurations.compile.allDependencies.each {
@@ -54,6 +53,9 @@ android {
 dependencies {
     expectedBy project(':common')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    // compile type binaryprefs dependency is needed to specify that 
+    // it should be included in the .pom file of the kissme-android artifact
+    // TODO: find a better way to declare it
     compile "com.github.yandextaxitech:binaryprefs:1.0.1"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
