@@ -14,10 +14,11 @@ Currently library supports the following platforms:
 - iOS (`ios_arm64` and `ios_x64` targets)
 
 ## Download
-To use this library in your project, add Netguru bintray url to the repositories block:
+To use this library in your project, add Netguru and Binryprefs maven urls to the repositories block:
 ```groovy
 repositories {
     maven {  url 'https://dl.bintray.com/netguru/maven/' }
+    maven { url "https://jitpack.io" }
 }
 ```
 
@@ -26,17 +27,17 @@ Then add following dependencies to the common module build.gradle:
     sourceSets {
         commonMain {
             dependencies {
-                implementation 'com.netguru.kissme:kissme-common:0.2.2'     
+                implementation 'com.netguru.kissme:kissme-common:0.2.3'     
             }
         }
         androidMain {
             dependencies {
-                implementation 'com.netguru.kissme:kissme-android:0.2.2'
+                implementation 'com.netguru.kissme:kissme-android:0.2.3'
             }
         }
         iosMain {
             dependencies {
-                implementation 'com.netguru.kissme:kissme-ios:0.2.2'
+                implementation 'com.netguru.kissme:kissme-ios:0.2.3'
             }
         }
     }
