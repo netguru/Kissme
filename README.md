@@ -114,6 +114,17 @@ Sample app uses Maven Local for resolving `Kissme` dependencies. Before running 
 2. Publish dependencies to Maven Local - `./gradlew publishToMavenLocal`
 3. Run selected library. If you want to run iOS app - you need to properly configure Xcode.
  Please check: https://kotlinlang.org/docs/tutorials/native/mpp-ios-android.html#setting-up-xcode before running iOS sample app.
+ 
+## Development roadmap
+1. Configure integration tests on iOS
+2. Add CI
+3. Add support for Android API < 23
+4. Automate KeychainWrapper framework generation
+5. Migrate to kotlin-multiplatform Gradle plugin
+6. Clean up .pom dependencies declarations
+7. Add frontend support - experimental, consider, need help
+
+Kissme is an open source project developed and maintained by Kotlin community. Feel free to contribute to the project.
 
 ## License
 
