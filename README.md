@@ -122,7 +122,7 @@ Sample app uses Maven Local for resolving `Kissme` dependencies. Before running 
 4. Automate KeychainWrapper framework generation
 5. Migrate to kotlin-multiplatform Gradle plugin
 6. Clean up .pom dependencies declarations
-7. Add frontend support - experimental, consider, need help
+7. Add experimental JavaScript support - call for ideas
 
 Kissme is an open source project developed and maintained by Kotlin community. Feel free to contribute to the project.
 
