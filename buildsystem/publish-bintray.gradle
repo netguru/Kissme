@@ -8,10 +8,8 @@ publishing {
         maven { url = 'https://dl.bintray.com/netguru/maven/' }
     }
 }
-Properties properties = new Properties()
-properties.load(project.rootProject.file('secret.properties').newDataInputStream())
-def bintrayUser = properties.getProperty('bintrayUser')
-def apiKey = properties.getProperty('bintrayApiKey')
+def bintrayUser = keyProperty('BINTRAY_USER')
+def apiKey = keyProperty('BINTRAY_API_KEY')
 bintray {
     user bintrayUser
     key apiKey

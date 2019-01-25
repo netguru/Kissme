@@ -1,0 +1,35 @@
+ext {
+    bitrise = [
+            // Bitrise command line interface specific properties
+            cli: [
+                    workflowId   : System.getenv('BITRISE_TRIGGERED_WORKFLOW_ID'),
+                    workflowTitle: System.getenv('BITRISE_TRIGGERED_WORKFLOW_TITLE'),
+                    buildStatus  : System.getenv('BITRISE_BUILD_STATUS'),
+                    sourceDir    : System.getenv('BITRISE_SOURCE_DIR'),
+                    deployDir    : System.getenv('BITRISE_DEPLOY_DIR'),
+                    isCi         : "true" == System.getenv('CI'),
+                    isPr         : "true" == System.getenv('PR'),
+            ],
+            // Bitrise.io - only
+            io : [
+                    buildNumber          : System.getenv('BITRISE_BUILD_NUMBER'),
+                    gitUrl               : System.getenv('GIT_REPOSITORY_URL'),
+                    appTitle             : System.getenv('BITRISE_APP_TITLE'),
+                    appUrl               : System.getenv('BITRISE_APP_URL'),
+                    appSlug              : System.getenv('BITRISE_APP_SLUG'),
+                    buildUrl             : System.getenv('BITRISE_BUILD_URL'),
+                    buildSlug            : System.getenv('BITRISE_BUILD_SLUG'),
+                    buildTriggerTimestamp: System.getenv('BITRISE_BUILD_TRIGGER_TIMESTAMP'),
+                    gitBranch            : System.getenv('BITRISE_GIT_BRANCH'),
+                    gitTag               : System.getenv('BITRISE_GIT_TAG'),
+                    gitCommit            : System.getenv('BITRISE_GIT_COMMIT'),
+                    gitMessage           : System.getenv('BITRISE_GIT_MESSAGE'),
+                    pullRequest          : System.getenv('BITRISE_PULL_REQUEST'),
+                    provisionUrl         : System.getenv('BITRISE_PROVISION_URL'),
+                    certificateUrl       : System.getenv('BITRISE_CERTIFICATE_URL'),
+                    certificatePassphrase: System.getenv('BITRISE_CERTIFICATE_PASSPHRASE'),
+            ]
+    ]
+
+    isBitrise = bitrise.cli.isCi || bitrise.cli.isPr
+}
