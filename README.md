@@ -119,7 +119,7 @@ Sample app uses Maven Local for resolving `Kissme` dependencies. Before running 
  
 ## Development roadmap
 1. Configure integration tests on iOS
-2. Add CI
+2. ~Add CI~
 3. Add support for Android API < 23
 4. Automate KeychainWrapper framework generation
 5. Migrate to kotlin-multiplatform Gradle plugin
