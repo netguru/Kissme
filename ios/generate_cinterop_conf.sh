@@ -1,12 +1,12 @@
 #! /bin/bash
-current_dir=`pwd`
-target_file_dir="./src/main/c_interop/"
+current_dir=$1
+target_file_dir="$1/src/main/c_interop/"
 target_file_name="keychainwrapper.def"
 
 rm -f "$target_file_dir$target_file_name"
 
 echo "writing config to $target_file_dir$target_file_name"
-
+echo "currentdir $current_dir"
 mkdir -p $target_file_dir
 echo \
 "language = Objective-C

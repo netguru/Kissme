@@ -30,7 +30,7 @@ task generateCinteropConfig(type :Exec){
 }
 
 gradle.taskGraph.beforeTask { Task task ->
-    if (task.project.name == "ios") {
-        tasks.generateCinteropConfig.execute()
+    if (task.project.name.toLowerCase().contains("ios")) {
+        "sh ${projectDir}/generate_cinterop_conf.sh ${projectDir}".execute().text
     }
 }
