@@ -18,7 +18,7 @@ actual class Kissme actual constructor(name: String?) {
     }
 
     actual fun getString(key: String, defaultValue: String?): String? {
-        return Keychain.passwordForService(serviceName, key)
+        return Keychain.passwordForService(serviceName, key) ?: defaultValue
     }
 
     actual fun putString(key: String, value: String) {
