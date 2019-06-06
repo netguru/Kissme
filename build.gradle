@@ -25,10 +25,6 @@ allprojects {
         maven { url "https://jitpack.io" }
     }
 
-    apply from: rootProject.file("buildsystem/bitrise.gradle")
-    apply from: rootProject.file("buildsystem/secrets.gradle")
-    apply from: rootProject.file("buildsystem/publish-bintray.gradle")
-
     group 'com.netguru.kissme'
     version libraryVersion
 
