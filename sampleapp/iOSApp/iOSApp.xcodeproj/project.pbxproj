@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C90C16B21B6B02C0002CEE8 /* app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C90C16A21B6B02C0002CEE8 /* app.framework */; };
-		3C90C16C21B6B02C0002CEE8 /* app.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C90C16A21B6B02C0002CEE8 /* app.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9EE04B9021A5D9DB00FB164D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE04B8F21A5D9DB00FB164D /* AppDelegate.swift */; };
 		9EE04B9221A5D9DB00FB164D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE04B9121A5D9DB00FB164D /* MainViewController.swift */; };
 		9EE04B9521A5D9DB00FB164D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EE04B9321A5D9DB00FB164D /* Main.storyboard */; };
 		9EE04B9721A5D9DD00FB164D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EE04B9621A5D9DD00FB164D /* Assets.xcassets */; };
 		9EE04B9A21A5D9DD00FB164D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EE04B9821A5D9DD00FB164D /* LaunchScreen.storyboard */; };
+		F8389433234C9637000E606D /* app.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F8389431234C9637000E606D /* app.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F8389434234C9780000E606D /* app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8389431234C9637000E606D /* app.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,7 +23,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3C90C16C21B6B02C0002CEE8 /* app.framework in Embed Frameworks */,
+				F8389433234C9637000E606D /* app.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -40,6 +40,7 @@
 		9EE04B9621A5D9DD00FB164D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9EE04B9921A5D9DD00FB164D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EE04B9B21A5D9DD00FB164D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8389431234C9637000E606D /* app.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = app.framework; path = ../app/build/bin/ios/debugFramework/app.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C90C16B21B6B02C0002CEE8 /* app.framework in Frameworks */,
+				F8389434234C9780000E606D /* app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +58,7 @@
 		3C5B8C8921A958CF000582E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8389431234C9637000E606D /* app.framework */,
 				9E9348B221ABFB1E00BFC0A6 /* app.framework */,
 			);
 			name = Frameworks;
@@ -130,7 +132,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9EE04B8721A5D9DB00FB164D /* Build configuration list for PBXProject "iosApp" */;
+			buildConfigurationList = 9EE04B8721A5D9DB00FB164D /* Build configuration list for PBXProject "iOSApp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -177,7 +179,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"${PROJECT_DIR}/..\"\n./gradlew :app:clean\n./gradlew :app:build\n./gradlew :app:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\ncd \"${PROJECT_DIR}/../app/build/xcode-frameworks\"\n";
+			shellScript = "cd \"${PROJECT_DIR}/..\"\n./gradlew :app:clean\n./gradlew :app:build\ncd \"${PROJECT_DIR}/../app/build/bin/ios/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -338,8 +340,13 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../app/build/xcode-frameworks",
+					"$(PROJECT_DIR)/../app/build/bin/ios/debugFramework",
 					"$(PROJECT_DIR)/../",
+				);
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../",
+					"$(PROJECT_DIR)/../app/build/bin/ios/debugFramework",
 				);
 				GENERATE_MASTER_OBJECT_FILE = NO;
 				INFOPLIST_FILE = iOSApp/Info.plist;
@@ -365,7 +372,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../sampleapp/app/build/xcode-frameworks",
+					"$(PROJECT_DIR)/../sampleapp/app/build/bin/ios/releaseFramework",
 					"$(PROJECT_DIR)/../ios",
 				);
 				GENERATE_MASTER_OBJECT_FILE = NO;
@@ -386,7 +393,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9EE04B8721A5D9DB00FB164D /* Build configuration list for PBXProject "iosApp" */ = {
+		9EE04B8721A5D9DB00FB164D /* Build configuration list for PBXProject "iOSApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9EE04B9C21A5D9DD00FB164D /* Debug */,
