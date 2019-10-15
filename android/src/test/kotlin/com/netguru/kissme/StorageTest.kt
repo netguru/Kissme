@@ -22,7 +22,7 @@ class StorageTest {
     @Test
     fun `should get all data from shared preferences when getting all`() {
         //given
-        every { preferences.all } returns emptyMap<String, String>()
+        every { preferences.all } returns mutableMapOf<String, Any>()
         //when
         storage.getAll()
         //then

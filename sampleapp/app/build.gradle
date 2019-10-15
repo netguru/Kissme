@@ -29,13 +29,12 @@ dependencies {
 }
 
 kotlin {
-    targets {
-        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? presets.iosArm64 : presets.iosX64
-        println("SDK_NAME="+System.getenv('SDK_NAME'))
-        println("iOSTarget="+iOSTarget.name)
-        fromPreset(presets.android, 'android')
-        fromPreset(iOSTarget, 'ios') {
-            compilations.main.outputKinds('FRAMEWORK')
+    android("android")
+    // This is for iPhone emulator
+    // Switch here to iosArm64 (or iosArm32) to build library for iPhone device
+    iosX64("ios") {
+        binaries {
+            framework()
         }
     }
     sourceSets {
@@ -62,24 +61,26 @@ kotlin {
     configurations {
         compileClasspath
     }
+}
 
-    task packForXCode(type: Sync) {
-        final File frameworkDir = new File(buildDir, "xcode-frameworks")
-        final String mode = System.getenv('CONFIGURATION')?.toUpperCase() ?: 'DEBUG'
+// This task attaches native framework built from ios module to Xcode project
+// (see iosApp directory). Don't run this task directly,
+// Xcode runs this task itself during its build process.
+// Before opening the project from iosApp directory in Xcode,
+// make sure all Gradle infrastructure exists (gradle.wrapper, gradlew).
+task copyFramework {
+    def buildType = project.findProperty('kotlin.build.type') ?: 'DEBUG'
+    def target = project.findProperty('kotlin.target') ?: 'ios'
+    dependsOn kotlin.targets."$target".binaries.getFramework(buildType).linkTask
 
-        inputs.property "mode", mode
-        dependsOn kotlin.targets.ios.compilations.main.linkTaskName("FRAMEWORK", mode)
-
-        from { kotlin.targets.ios.compilations.main.getBinary("FRAMEWORK", mode).parentFile }
-        into frameworkDir
-
-        doLast {
-            new File(frameworkDir, 'gradlew').with {
-                text = "#!/bin/bash\nexport 'JAVA_HOME=${System.getProperty("java.home")}'\ncd '${rootProject.rootDir}'\n./gradlew \$@\n"
-                setExecutable(true)
-            }
+    doLast {
+        def srcFile = kotlin.targets."$target".binaries.getFramework(buildType).outputFile
+        def targetDir = getProperty('configuration.build.dir')
+        copy {
+            from srcFile.parent
+            into targetDir
+            include 'app.framework/**'
+            include 'app.framework.dSYM'
         }
     }
 }
-
-tasks.build.dependsOn packForXCode
