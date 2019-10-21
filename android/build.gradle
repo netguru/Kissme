@@ -16,17 +16,20 @@ publishing {
             artifact("$buildDir/outputs/aar/android-release.aar")
             artifact sourcesJar
             artifactId 'kissme-android'
+            version project.libraryVersion
 
-            //The publication doesn't know about our dependencies, so we have to manually add them to the pom
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
-
-                //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
-                configurations.compile.allDependencies.each {
-                    def dependencyNode = dependenciesNode.appendNode('dependency')
-                    dependencyNode.appendNode('groupId', it.group)
-                    dependencyNode.appendNode('artifactId', it.name)
-                    dependencyNode.appendNode('version', it.version)
+                // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.implementation.allDependencies.each {
+                    // Ensure dependencies such as fileTree are not included in the pom.
+                    if (it.name != 'unspecified') {
+                        println(it.name)
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
                 }
             }
         }
@@ -34,29 +37,24 @@ publishing {
 }
 
 android {
-    compileSdkVersion androidCompileSdkVersion
+    compileSdkVersion 28
     defaultConfig {
-        minSdkVersion androidMinSdkVersion
+        minSdkVersion 23
+        targetSdkVersion 28
+        versionCode 1
+        versionName '1.0'
     }
-    testOptions.unitTests.includeAndroidResources = true
-
-    sourceSets.all {
-        it.java.srcDir "src/$it.name/kotlin"
-    }
-
-    // TODO replace with https://issuetracker.google.com/issues/72050365 once released.
-    libraryVariants.all {
-        it.generateBuildConfig.enabled = false
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
     }
 }
 
 dependencies {
     expectedBy project(':common')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    // compile type binaryprefs dependency is needed to specify that 
-    // it should be included in the .pom file of the kissme-android artifact
-    // TODO: find a better way to declare it
-    compile "com.github.yandextaxitech:binaryprefs:1.0.1"
+    implementation "com.github.yandextaxitech:binaryprefs:1.0.1"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testImplementation "io.mockk:mockk:1.9.3"
