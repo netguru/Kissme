@@ -5,6 +5,7 @@ publishing {
         mavenJava(MavenPublication) {
             from components.java
             artifactId "kissme-common"
+            version project.libraryVersion
         }
     }
 }

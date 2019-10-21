@@ -3,6 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 // ------------- tasks
+
 publishing {
     repositories {
         maven { url = 'https://dl.bintray.com/netguru/maven/' }
@@ -18,10 +19,14 @@ bintray {
         repo = 'maven'
         name = 'Kissme'
         publish = true
+        publicDownloadNumbers = true
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/netguru/Kissme'
         version {
             name = project.version
             vcsTag = project.version
             released  = new Date()
+            vcsTag = this.version
         }
     }
 }
@@ -31,6 +36,6 @@ bintrayUpload.dependsOn publishToMavenLocal
 bintrayUpload.doFirst {
     publications = project.publishing.publications.findAll { !it.name.contains('test') }.collect {
         println("Uploading artifact '$it.groupId:$it.artifactId:$it.version' from publication '$it.name'")
-        it
+        it.name
     }
-} 
+}
