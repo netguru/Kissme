@@ -15,7 +15,7 @@ publishing {
         android(MavenPublication) {
             artifact("$buildDir/outputs/aar/android-release.aar")
             artifact sourcesJar
-            artifactId 'kissme-android'
+            artifactId 'android'
             version project.libraryVersion
 
             pom.withXml {

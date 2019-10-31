@@ -19,6 +19,16 @@ android {
     androidExtensions {
         experimental = true
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
 }
 
 dependencies {
@@ -41,19 +51,19 @@ kotlin {
         commonMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
-                implementation "com.netguru.kissme:kissme-common:$libraryVersion"
+                implementation "com.netguru.kissme:common:$libraryVersion"
             }
         }
         androidMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-                implementation "com.netguru.kissme:kissme-android:$libraryVersion"
+                implementation "com.netguru.kissme:android:$libraryVersion"
             }
         }
 
         iosMain {
             dependencies {
-                implementation "com.netguru.kissme:kissme-ios:$libraryVersion"
+                implementation "com.netguru.kissme:ios:$libraryVersion"
             }
         }
     }

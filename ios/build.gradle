@@ -6,7 +6,7 @@ sourceSets.main {
 components.main {
     targets = ['ios_arm64', 'ios_x64']
     outputKinds = [KLIBRARY]
-    baseName = "kissme-ios"
+    baseName = "ios"
 
     dependencies {
         cinterop("keychainwrapper"){
