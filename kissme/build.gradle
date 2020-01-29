@@ -1,0 +1,141 @@
+plugins {
+    id("org.jetbrains.kotlin.multiplatform")
+}
+apply plugin: 'com.android.library'
+
+kotlin {
+    android {
+        publishLibraryVariants("release", "debug")
+    }
+
+    iosX64("iosX64") {
+        compilations.main.cinterops {
+            keychainwrapper {
+                packageName "com.netguru.keychainWrapper"
+                includeDirs {
+                    allHeaders "./library/keychainwrapper/bin"
+                }
+                compilerOpts "-F${projectDir}"
+            }
+        }
+    }
+
+    iosArm64("iosArm64") {
+        compilations.main.cinterops {
+            keychainwrapper {
+                packageName "com.netguru.keychainWrapper"
+                includeDirs {
+                    allHeaders "./library/keychainwrapper/bin"
+                }
+                compilerOpts "-F${projectDir}"
+            }
+        }
+    }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
+            }
+        }
+        commonTest {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-test-annotations-common"
+                implementation "org.jetbrains.kotlin:kotlin-test-common"
+            }
+        }
+
+        androidMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+                implementation "com.github.yandextaxitech:binaryprefs:1.0.1"
+            }
+        }
+        androidTest {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+                implementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+                implementation "io.mockk:mockk:1.9.3"
+                implementation "androidx.test:core:1.2.0"
+                implementation "androidx.test.ext:junit:1.1.1"
+                implementation "org.robolectric:robolectric:4.2"
+            }
+        }
+
+        iosMain {}
+        iosArm64Main.dependsOn iosMain
+        iosX64Main.dependsOn iosMain
+
+        iosTest {}
+        iosArm64Test.dependsOn iosTest
+        iosX64Test.dependsOn iosTest
+    }
+}
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 28
+        versionCode 1
+        versionName '1.0'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/androidMain/AndroidManifest.xml'
+            java.srcDirs = ['src/androidMain/java', 'src/androidMain/kotlin']
+            res.srcDirs = ['src/androidMain/res']
+        }
+    }
+}
+
+task generateCinteropConfig(type: Exec) {
+    workingDir "${projectDir}"
+    commandLine 'sh', "${projectDir}/generate_cinterop_conf.sh"
+}
+
+gradle.taskGraph.beforeTask { Task task ->
+    if (task.project.name.toLowerCase().contains("ios")) {
+        "sh ${projectDir}/generate_cinterop_conf.sh ${projectDir}".execute().text
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives sourcesJar
+}
+publishing {
+    publications {
+        android(MavenPublication) {
+            artifact("$buildDir/outputs/aar/android-release.aar")
+            artifact sourcesJar
+            artifactId 'android'
+            version project.libraryVersion
+
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+                // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.implementation.allDependencies.each {
+                    // Ensure dependencies such as fileTree are not included in the pom.
+                    if (it.name != 'unspecified') {
+                        println(it.name)
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+            }
+        }
+    }
+}
