@@ -117,7 +117,7 @@ artifacts {
 publishing {
     publications {
         android(MavenPublication) {
-            artifact("$buildDir/outputs/aar/android-release.aar")
+            artifact("$buildDir/outputs/aar/kissme-release.aar")
             artifact sourcesJar
             artifactId 'android'
             version project.libraryVersion
