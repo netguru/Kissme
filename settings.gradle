@@ -1,2 +1,2 @@
 enableFeaturePreview('GRADLE_METADATA')
-include ':android', ':ios', ':common'
+include ':kissme'

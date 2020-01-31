@@ -1,6 +1,6 @@
 #! /bin/bash
 current_dir=$1
-target_file_dir="$1/src/main/c_interop/"
+target_file_dir="$1/src/nativeinterop/cinterop/"
 target_file_name="keychainwrapper.def"
 
 rm -f "$target_file_dir$target_file_name"

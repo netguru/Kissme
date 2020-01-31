@@ -24,7 +24,7 @@
 bin/
 gen/
 out/
-!/ios/library/keychainwrapper/bin
+!/kissme/library/keychainwrapper/bin
 
 # Gradle files
 .gradle/
@@ -96,7 +96,7 @@ fabric.properties
 .LSOverride
 
 # ios cinterop .def file
-/ios/src/main/c_interop/keychainwrapper.def
+/kissme/src/nativeInterop/cinterop/keychainwrapper.def
 
 # Build-time secrets
 secret.properties
