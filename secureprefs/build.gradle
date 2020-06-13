@@ -1,0 +1,126 @@
+plugins {
+    id("org.jetbrains.kotlin.multiplatform")
+    id("maven-publish")
+}
+apply plugin: 'com.android.library'
+
+kotlin {
+    android {
+        publishLibraryVariants("release", "debug")
+    }
+
+    iosX64("iosX64") {
+        compilations.main.cinterops {
+            keychainwrapper {
+                packageName "com.netguru.keychainWrapper"
+                includeDirs {
+                    allHeaders "./library/keychainwrapper/bin"
+                }
+                compilerOpts "-F${projectDir}"
+            }
+        }
+    }
+
+    iosArm64("iosArm64") {
+        compilations.main.cinterops {
+            keychainwrapper {
+                packageName "com.netguru.keychainWrapper"
+                includeDirs {
+                    allHeaders "./library/keychainwrapper/bin"
+                }
+                compilerOpts "-F${projectDir}"
+            }
+        }
+    }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
+            }
+        }
+        commonTest {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-test-annotations-common"
+                implementation "org.jetbrains.kotlin:kotlin-test-common"
+            }
+        }
+
+        androidMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+                implementation "androidx.security:security-crypto:1.1.0-alpha01"
+            }
+        }
+        androidTest {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+                implementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+                implementation "io.mockk:mockk:1.9.3"
+                implementation "androidx.test:core:1.2.0"
+                implementation "androidx.test.ext:junit:1.1.1"
+                implementation "org.robolectric:robolectric:4.2"
+            }
+        }
+
+        iosMain {}
+        iosArm64Main.dependsOn iosMain
+        iosX64Main.dependsOn iosMain
+
+        iosTest {}
+        iosArm64Test.dependsOn iosTest
+        iosX64Test.dependsOn iosTest
+    }
+}
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName '1.0'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/androidMain/AndroidManifest.xml'
+            java.srcDirs = ['src/androidMain/java', 'src/androidMain/kotlin']
+            res.srcDirs = ['src/androidMain/res']
+        }
+    }
+}
+
+task generateCinteropConfig(type: Exec) {
+    workingDir "${projectDir}"
+    commandLine 'sh', "${projectDir}/generate_cinterop_conf.sh"
+}
+
+gradle.taskGraph.beforeTask { Task task ->
+    if (task.project.name.toLowerCase().contains("ios")) {
+        "sh ${projectDir}/generate_cinterop_conf.sh ${projectDir}".execute().text
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+publishing {
+    publications {
+        kotlinMultiplatform {
+            artifactId = "common"
+        }
+    }
+}
+

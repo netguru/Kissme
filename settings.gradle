@@ -1,2 +1,2 @@
 enableFeaturePreview('GRADLE_METADATA')
-include ':kissme'
+include ':secureprefs'

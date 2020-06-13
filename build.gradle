@@ -1,7 +1,7 @@
 apply from: 'versions.gradle'
 
 buildscript {
-    ext.kotlin_version = '1.3.60'
+    ext.kotlin_version = '1.3.72'
 
     repositories {
         maven { url 'https://dl.bintray.com/jetbrains/kotlin-native-dependencies' }
@@ -28,7 +28,7 @@ allprojects {
     apply from: rootProject.file("buildsystem/secrets.gradle")
     apply from: rootProject.file("buildsystem/publish-bintray.gradle")
 
-    group 'com.netguru.kissme'
+    group 'com.icecreamhappens.secureprefs'
     version libraryVersion
 
     tasks.withType(Test) {

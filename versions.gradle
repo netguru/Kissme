@@ -1,5 +1,5 @@
 ext {
-    androidMinSdkVersion = 23
-    androidCompileSdkVersion = 28
-    libraryVersion = '0.2.5'
+    androidMinSdkVersion = 21
+    androidCompileSdkVersion = 29
+    libraryVersion = '0.3.0'
 }

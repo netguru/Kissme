@@ -1,18 +1,17 @@
 
-# Kissme: Kotlin Secure Storage Multiplatform
-
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Kissme-brightgreen.svg?style=flat-square)](https://android-arsenal.com/details/1/7452)
-[![Build Status](https://app.bitrise.io/app/b68dbe54aa16417f/status.svg?token=xAwQZBpUd_XUybTNkRTiIQ)](https://app.bitrise.io/app/b68dbe54aa16417f)
+# SecurePrefs: Encrypted Storage for Kotlin Multiplatform
 
 
-**Kissme** is an open-source library providing encrypted key-value storage.
+
+
+**SecurePrefs** is an open-source library providing encrypted key-value storage.
 
 It can be integrated seamlessly in Kotlin projects built with **Kotlin Multiplatform**, **Kotlin/Native**, and **Kotlin Android** plugins.
 
-**Kissme** allows storing key-value data in common code modules without any additional boilerplate code.
+**SecurePrefs** allows storing key-value data in common code modules without any additional boilerplate code.
 
-Currently library supports the following platforms:
-- Android (API `>=` 23)
+Supported platforms:
+- Android (API `>=` 21)
 - iOS (`ios_arm64` and `ios_x64` targets)
 
 ## Download
@@ -29,17 +28,17 @@ Then add following dependencies to the common module build.gradle:
     sourceSets {
         commonMain {
             dependencies {
-                implementation 'com.netguru.kissme:common:0.2.5'     
+                implementation 'com.icecreamhappens.secureprefs:common:0.2.5'     
             }
         }
         androidMain {
             dependencies {
-                implementation 'com.netguru.kissme:android:0.2.5'
+                implementation 'com.icecreamhappens.secureprefs:android:0.2.5'
             }
         }
         iosMain {
             dependencies {
-                implementation 'com.netguru.kissme:ios:0.2.5'
+                implementation 'com.icecreamhappens.secureprefs:ios:0.2.5'
             }
         }
     }

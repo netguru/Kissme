@@ -51,19 +51,19 @@ kotlin {
         commonMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
-                implementation "com.netguru.kissme:common:$libraryVersion"
+                implementation "com.icecreamhappens.secureprefs:common:$libraryVersion"
             }
         }
         androidMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-                implementation "com.netguru.kissme:android:$libraryVersion"
+                implementation "com.icecreamhappens.secureprefs:android:$libraryVersion"
             }
         }
 
         iosMain {
             dependencies {
-                implementation "com.netguru.kissme:ios:$libraryVersion"
+                implementation "com.icecreamhappens.secureprefs:ios:$libraryVersion"
             }
         }
     }

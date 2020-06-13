@@ -1,5 +1,5 @@
 package com.netguru.sample
-import com.netguru.kissme.Kissme
+import com.icecreamhappens.secureprefs.Kissme
 
 class MainPresenter {
 
