@@ -18,7 +18,6 @@ Supported platforms:
 To use this library in your project, add Netguru and Binryprefs maven urls to the repositories block:
 ```groovy
 repositories {
-    maven {  url 'https://dl.bintray.com/netguru/maven/' }
     maven { url "https://jitpack.io" }
 }
 ```
@@ -31,16 +30,6 @@ Then add following dependencies to the common module build.gradle:
                 implementation 'com.icecreamhappens.secureprefs:common:0.2.5'     
             }
         }
-        androidMain {
-            dependencies {
-                implementation 'com.icecreamhappens.secureprefs:android:0.2.5'
-            }
-        }
-        iosMain {
-            dependencies {
-                implementation 'com.icecreamhappens.secureprefs:ios:0.2.5'
-            }
-        }
     }
 ```
 
@@ -49,13 +38,13 @@ Remember to enable `GRADLE_METADATA` in `settings.gradle`:
 enableFeaturePreview('GRADLE_METADATA')
 ```
 ## Usage
-Just start with creating an instance of `Kissme` class somewhere in your common module and enjoy! It's as simple as that.
+Just start with creating an instance of `SecurePrefs` class somewhere in your common module and enjoy! It's as simple as that.
 You don't have to initialize it by yourself nor to pass Android `Context`. Everything is done automatically.
 ```kotlin
-val storage = Kissme(name = "my_secret_storage")
+val storage = SecurePrefs(name = "my_secret_storage")
 ```
 The `name` parameter is optional. You can omit it if you want to use default storage.
-`Kissme` allows you to store and persist multiple data types:
+`SecurePrefs` allows you to store and persist multiple data types:
 - String
 - Int
 - Long
@@ -96,11 +85,11 @@ storage.clear()
 ```
 
 ## About
-`Kissme` allows to store key-value pairs in platform-specific way securely.
+`SecurePrefs` allows to store key-value pairs in platform-specific way securely.
+Forked from `Kissme` to add api level 21 support and replace Android implementation with androidx.security.EncryptedSharedPreferences
 
 ### Android
-Android implementation uses [binaryprefs](https://github.com/yandextaxitech/binaryprefs) library under the hood in order to provide a robust key-value storage mechanism. 
-The keys and values are encrypted using XOR and AES encryption accordingly. The data encryption and encryption keys storing generating mechanisms are fully automated and is applied to the stored data by default. All the encryption keys are stored in the Android `KeyStore`.  
+Android implementation uses androidx.security.EncryptedSharedPreferences
 
 In order to acquire the application `Context` instance required for data storing operations the library registers an internal 
  `ContentProvider`.
@@ -116,20 +105,12 @@ Sample app uses Maven Local for resolving `Kissme` dependencies. Before running 
 3. Run selected library. If you want to run iOS app - you need to properly configure Xcode.
  Please check: https://kotlinlang.org/docs/tutorials/native/mpp-ios-android.html#setting-up-xcode before running iOS sample app.
  
-## Development roadmap
-1. Configure integration tests on iOS
-2. ~Add CI~
-3. Add support for Android API < 23
-4. Automate KeychainWrapper framework generation
-5. Migrate to kotlin-multiplatform Gradle plugin
-6. Clean up .pom dependencies declarations
-7. Add experimental JavaScript support - call for ideas
-
-Kissme is an open source project developed and maintained by Kotlin community. Feel free to contribute to the project.
 
 ## License
 
 Copyright 2018 Netguru
+
+Copyright 2020 ATizik
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

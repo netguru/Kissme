@@ -1,3 +1,6 @@
+import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
+import org.gradle.api.publish.maven.internal.artifact.FileBasedMavenArtifact
+
 apply from: 'versions.gradle'
 
 buildscript {
@@ -35,6 +38,22 @@ allprojects {
         testLogging {
             showStandardStreams = true
             events 'passed', 'failed'
+        }
+    }
+
+    //workaround for kotlin multiplatform metadata support
+    tasks.withType(BintrayUploadTask) {
+        doFirst {
+            publishing.publications.withType(MavenPublication).forEach({ publication ->
+                File moduleFile = new File(project.buildDir, "publications/${publication.name}/module.json")
+                if (moduleFile.exists()) {
+                    publication.artifact(new FileBasedMavenArtifact(moduleFile) {
+                        protected String getDefaultExtension() {
+                            return 'module';
+                        }
+                    })
+                }
+            })
         }
     }
 }

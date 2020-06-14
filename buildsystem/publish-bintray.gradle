@@ -4,11 +4,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 // ------------- tasks
 
-publishing {
-    repositories {
-        maven { url = 'https://dl.bintray.com/netguru/maven/' }
-    }
-}
+
 def bintrayUser = keyProperty('BINTRAY_USER')
 def apiKey = keyProperty('BINTRAY_API_KEY')
 bintray {
@@ -17,13 +13,13 @@ bintray {
     override = true // for multi-platform Kotlin/Native publishing
     pkg {
         repo = 'maven'
-        name = 'Kissme'
+        name = 'SecurePrefs'
         publish = true
         publicDownloadNumbers = true
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/netguru/Kissme'
+        vcsUrl = 'https://github.com/ATizik-d4l/Secure-Prefs'
         version {
-            name = project.version
+            name = "0.3.0"
             vcsTag = project.version
             released  = new Date()
             vcsTag = this.version
@@ -39,3 +35,4 @@ bintrayUpload.doFirst {
         it.name
     }
 }
+
