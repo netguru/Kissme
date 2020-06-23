@@ -1,4 +1,4 @@
-
+[ ![Download](https://api.bintray.com/packages/atizik/maven/SecurePrefs/images/download.svg) ](https://bintray.com/atizik/maven/SecurePrefs/_latestVersion)
 # SecurePrefs: Encrypted Storage for Kotlin Multiplatform
 
 
@@ -27,7 +27,7 @@ Then add following dependencies to the common module build.gradle:
     sourceSets {
         commonMain {
             dependencies {
-                implementation 'com.icecreamhappens.secureprefs:common:0.2.5'     
+                implementation 'com.icecreamhappens.secureprefs:common:0.3.0'     
             }
         }
     }
@@ -64,12 +64,12 @@ storage.getString(key = "someKey", defaultValue = "default")
 
 All `get()` functions will return `defaultValue` parameter if storage doesn't contain selected `key`.
 
-You can get all keys stored in `Kissme` storage by calling:
+You can get all keys stored in `SecurePrefs` storage by calling:
 ```kotlin
 storage.getAll()
 ```
 
-You can check if `Kissme` storage contains selected `key` by calling:
+You can check if `SecurePrefs` storage contains selected `key` by calling:
 ```kotlin
 storage.contains(key = "someKey")
 ```
@@ -79,7 +79,7 @@ You can also remove selected key from storage:
 storage.remove(key = "someKey")
 ```
 
-Last, but not least, you can remove all data stored in `Kissme` storage:
+Last, but not least, you can remove all data stored in `SecurePrefs` storage:
 ```kotlin
 storage.clear()
 ```
@@ -99,7 +99,7 @@ The iOS implementation is using native iOS `Keychain`. The Secure Enclave is a h
 `Keychain` is simple wrapper build upon `Security` interface to store, save, and fetch not only passwords, but also accounts.
 
 ## Running sample app
-Sample app uses Maven Local for resolving `Kissme` dependencies. Before running sample app you need to:
+Sample app uses Maven Local for resolving `SecurePrefs` dependencies. Before running sample app you need to:
 1. Build the library - `./gradlew build`
 2. Publish dependencies to Maven Local - `./gradlew publishToMavenLocal`
 3. Run selected library. If you want to run iOS app - you need to properly configure Xcode.
