@@ -16,7 +16,12 @@ kotlin {
                 includeDirs {
                     allHeaders "./library/keychainwrapper/bin"
                 }
-                compilerOpts "-F${projectDir}"
+                compilerOpts "-F${projectDir} -fembed-bitcode -embed-bitcode"
+            }
+        }
+        binaries {
+            framework {
+                embedBitcode "bitcode"
             }
         }
     }
@@ -28,7 +33,12 @@ kotlin {
                 includeDirs {
                     allHeaders "./library/keychainwrapper/bin"
                 }
-                compilerOpts "-F${projectDir}"
+                compilerOpts "-F${projectDir} -fembed-bitcode -embed-bitcode"
+            }
+        }
+        binaries {
+            framework {
+                embedBitcode "bitcode"
             }
         }
     }

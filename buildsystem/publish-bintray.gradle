@@ -19,7 +19,7 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/ATizik-d4l/Secure-Prefs'
         version {
-            name = "0.3.0"
+            name = "0.3.0-bitcode_6"
             vcsTag = project.version
             released  = new Date()
             vcsTag = this.version

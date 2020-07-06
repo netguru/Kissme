@@ -1,5 +1,5 @@
 ext {
     androidMinSdkVersion = 21
     androidCompileSdkVersion = 29
-    libraryVersion = '0.3.0'
+    libraryVersion = '0.3.0-bitcode_6'
 }
